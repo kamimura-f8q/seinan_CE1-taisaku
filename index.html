@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>英語復習ツール</title>
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ========================================
+     LOGIN
+     ======================================== -->
+<div id="screen-login" class="screen active">
+  <div class="login-wrap">
+    <div class="login-card">
+      <div class="login-logo">📖</div>
+      <h1 class="login-title">英語復習ツール</h1>
+      <p class="login-sub">Revised COMET English Communication I</p>
+
+      <div class="login-form">
+        <label class="login-label" for="login-class">クラス</label>
+        <input type="text" id="login-class" class="login-input"
+               placeholder="例：1-A" maxlength="10"
+               onkeydown="if(event.key==='Enter')document.getElementById('login-num').focus()" />
+
+        <label class="login-label" for="login-num">出席番号</label>
+        <input type="number" id="login-num" class="login-input"
+               placeholder="例：05" min="1" max="99"
+               onkeydown="if(event.key==='Enter')App.submitLogin()" />
+
+        <button class="btn-primary btn-login" onclick="App.submitLogin()">スタート！ →</button>
+      </div>
+
+      <p class="login-note">クラスと出席番号で進捗が保存されます</p>
+    </div>
+  </div>
+</div>
+
+<!-- ========================================
+     LESSON SELECT
+     ======================================== -->
+<div id="screen-lesson-select" class="screen">
+  <header class="top-header">
+    <div class="top-header-inner">
+      <h1>📖 英語復習ツール</h1>
+      <p class="subtitle">Lessonを選んでスタート！</p>
+      <div id="user-badge" class="user-badge"></div>
+    </div>
+  </header>
+  <div id="lesson-list" class="lesson-grid"></div>
+  <footer class="app-footer">
+    <button class="footer-record-btn" onclick="App.showFeedback()">📊 マイ記録</button>
+    <button class="footer-settings-btn" onclick="App.openSettings()">⚙️ 設定</button>
+  </footer>
+</div>
+
+<!-- ========================================
+     MODE MAP
+     ======================================== -->
+<div id="screen-mode-map" class="screen">
+  <header class="top-header">
+    <div class="top-header-inner" style="position:relative">
+      <button class="back-btn" onclick="App.showLessonSelect()">← 一覧</button>
+      <h2 id="mode-map-title"></h2>
+      <p id="mode-map-subtitle" class="subtitle"></p>
+      <button class="settings-btn" onclick="App.openSettings()" title="設定">⚙️</button>
+    </div>
+  </header>
+
+  <div class="mode-path">
+    <!-- 単語 -->
+    <div class="mode-section" id="section-vocabulary">
+      <div class="mode-section-label vocab-label">📝 単語モード</div>
+      <div class="mode-cards-row">
+        <div class="mode-card" id="card-vocab-flashcard" onclick="App.startMode('vocab','flashcard')">
+          <div class="mode-icon">🃏</div>
+          <div class="mode-name">フラッシュカード</div>
+          <div class="mode-status"></div>
+        </div>
+        <div class="mode-arrow">→</div>
+        <div class="mode-card" id="card-vocab-quiz" onclick="App.startMode('vocab','quiz')">
+          <div class="mode-icon">4️⃣</div>
+          <div class="mode-name">4択クイズ</div>
+          <div class="mode-status"></div>
+        </div>
+        <div class="mode-arrow">→</div>
+        <div class="mode-card" id="card-vocab-fill" onclick="App.startMode('vocab','fill')">
+          <div class="mode-icon">📝</div>
+          <div class="mode-name">穴埋め（例文）</div>
+          <div class="mode-status"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-arrow" id="arrow-to-reading">↓ 単語モードコンプリートで解放</div>
+
+    <!-- 本文 -->
+    <div class="mode-section" id="section-reading">
+      <div class="mode-section-label reading-label">📖 本文モード</div>
+      <div class="mode-cards-row">
+        <div class="mode-card" id="card-reading-translate" onclick="App.startMode('reading','translate')">
+          <div class="mode-icon">🔍</div>
+          <div class="mode-name">和訳確認</div>
+          <div class="mode-status"></div>
+        </div>
+        <div class="mode-arrow">→</div>
+        <div class="mode-card" id="card-reading-english" onclick="App.startMode('reading','english')">
+          <div class="mode-icon">🖊️</div>
+          <div class="mode-name">英訳練習</div>
+          <div class="mode-status"></div>
+        </div>
+        <div class="mode-arrow">→</div>
+        <div class="mode-card" id="card-reading-comprehension" onclick="App.startMode('reading','comprehension')">
+          <div class="mode-icon">❓</div>
+          <div class="mode-name">内容確認クイズ</div>
+          <div class="mode-status"></div>
+        </div>
+        <div class="mode-arrow">→</div>
+        <div class="mode-card" id="card-reading-rewrite" onclick="App.startMode('reading','rewrite')">
+          <div class="mode-icon">📄</div>
+          <div class="mode-name">アレンジ版問題</div>
+          <div class="mode-status"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-arrow" id="arrow-to-grammar">↓ 本文モードコンプリートで解放</div>
+
+    <!-- 文法 -->
+    <div class="mode-section" id="section-grammar">
+      <div class="mode-section-label grammar-label">⚡ 文法モード</div>
+      <div class="mode-cards-row">
+        <div class="mode-card" id="card-grammar-rules" onclick="App.startMode('grammar','rules')">
+          <div class="mode-icon">📖</div>
+          <div class="mode-name">ルール確認</div>
+          <div class="mode-status"></div>
+        </div>
+        <div class="mode-arrow">→</div>
+        <div class="mode-card" id="card-grammar-fill" onclick="App.startMode('grammar','fill')">
+          <div class="mode-icon">📝</div>
+          <div class="mode-name">穴埋め問題</div>
+          <div class="mode-status"></div>
+        </div>
+        <div class="mode-arrow">→</div>
+        <div class="mode-card" id="card-grammar-rearrange" onclick="App.startMode('grammar','rearrange')">
+          <div class="mode-icon">🔀</div>
+          <div class="mode-name">並べ替え問題</div>
+          <div class="mode-status"></div>
+        </div>
+        <div class="mode-arrow">→</div>
+        <div class="mode-card" id="card-grammar-composition" onclick="App.startMode('grammar','composition')">
+          <div class="mode-icon">🤖</div>
+          <div class="mode-name">AI英作文</div>
+          <div class="mode-status"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========================================
+     QUIZ
+     ======================================== -->
+<div id="screen-quiz" class="screen">
+  <header class="quiz-header">
+    <button class="back-btn-quiz" onclick="App.showModeMap()">←</button>
+    <div class="quiz-header-center">
+      <div id="quiz-title"></div>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-fill" id="quiz-progress-bar"></div>
+      </div>
+      <div id="quiz-progress-text" style="font-size:.72rem;opacity:.85"></div>
+    </div>
+    <div id="quiz-score-display">
+      <span id="current-score">0</span>/<span id="total-questions">0</span>
+    </div>
+  </header>
+
+  <div id="quiz-content" class="quiz-content"></div>
+
+  <div class="quiz-nav">
+    <button id="btn-check"  class="btn-primary"             onclick="App.checkAnswer()"  style="display:none">答え合わせ</button>
+    <button id="btn-next"   class="btn-secondary"           onclick="App.nextQuestion()" style="display:none">次へ →</button>
+    <button id="btn-finish" class="btn-primary btn-green"   onclick="App.finishMode()"   style="display:none">結果を見る 🏁</button>
+  </div>
+</div>
+
+<!-- ========================================
+     RESULT
+     ======================================== -->
+<div id="screen-result" class="screen">
+  <div class="result-wrap">
+    <div class="result-card">
+      <div id="result-emoji" class="result-emoji"></div>
+      <h2 id="result-title"></h2>
+      <div id="result-score" class="result-score"></div>
+      <p id="result-message" class="result-message"></p>
+      <div id="result-unlock" class="result-unlock" style="display:none"></div>
+      <div class="result-buttons">
+        <button class="btn-secondary" onclick="App.retryMode()">🔄 もう一度</button>
+        <button class="btn-primary"   onclick="App.showModeMap()">マップへ →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========================================
+     FEEDBACK
+     ======================================== -->
+<div id="screen-feedback" class="screen">
+  <header class="top-header">
+    <div class="top-header-inner" style="position:relative">
+      <button class="back-btn" onclick="App.showLessonSelect()">← 一覧</button>
+      <h2>📊 マイ記録</h2>
+      <div id="feedback-user-label" class="feedback-user-label"></div>
+    </div>
+  </header>
+  <div id="feedback-content" class="feedback-content"></div>
+</div>
+
+<!-- ========================================
+     SETTINGS MODAL
+     ======================================== -->
+<div id="modal-settings" class="modal-overlay" style="display:none" onclick="if(event.target===this)App.closeSettings()">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h3>⚙️ 設定</h3>
+      <button class="modal-close" onclick="App.closeSettings()">✕</button>
+    </div>
+
+    <div class="settings-section">
+      <div class="settings-label">👤 ログイン中のユーザー</div>
+      <div id="settings-user-status" class="api-key-status"></div>
+      <button class="btn-danger btn-sm" onclick="App.logout()">ログアウト（別のユーザーに切り替え）</button>
+    </div>
+
+    <hr class="settings-divider" />
+
+    <div class="settings-section">
+      <div class="settings-label">🤖 Claude APIキー（AI英作文採点用）</div>
+      <div id="api-key-status" class="api-key-status">未設定</div>
+      <input type="password" id="api-key-input" placeholder="sk-ant-..." class="settings-input" />
+      <div class="settings-row">
+        <button class="btn-secondary btn-sm" onclick="App.clearApiKey()">削除</button>
+        <button class="btn-primary  btn-sm" onclick="App.saveApiKeyAndStart()">保存</button>
+      </div>
+      <p class="settings-note">APIキーはこのブラウザにのみ保存されます。</p>
+    </div>
+
+    <hr class="settings-divider" />
+
+    <div class="settings-section">
+      <div class="settings-label">📊 Google Apps Script URL（教員追跡・クラウド保存）</div>
+      <div id="gs-url-status" class="api-key-status">未設定</div>
+      <input type="text" id="gs-url-input" placeholder="https://script.google.com/macros/s/..." class="settings-input" />
+      <div class="settings-row">
+        <button class="btn-secondary btn-sm" onclick="App.clearGsUrl()">削除</button>
+        <button class="btn-primary  btn-sm" onclick="App.saveGsUrl()">保存</button>
+      </div>
+      <p class="settings-note">設定するとスコアがGoogle Sheetsに自動記録され、どの端末でも進捗が引き継がれます。</p>
+    </div>
+
+    <hr class="settings-divider" />
+
+    <div class="settings-section">
+      <div class="settings-label">⚠️ 進捗のリセット</div>
+      <p class="settings-note">現在のLessonのクリア状況をすべてリセットします。</p>
+      <button class="btn-danger btn-sm" onclick="App.confirmResetLesson()">このLessonの進捗をリセット</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast"></div>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
