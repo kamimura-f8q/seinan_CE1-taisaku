@@ -20,10 +20,17 @@
       <p class="login-sub">Revised COMET English Communication I</p>
 
       <div class="login-form">
-        <label class="login-label" for="login-class">クラス</label>
-        <input type="text" id="login-class" class="login-input"
-               placeholder="例：1-A" maxlength="10"
-               onkeydown="if(event.key==='Enter')document.getElementById('login-num').focus()" />
+        <label class="login-label">クラス</label>
+        <div class="class-selector" id="class-selector">
+          <button class="class-btn" data-value="A組" onclick="App.selectClass(this)">A組</button>
+          <button class="class-btn" data-value="B組" onclick="App.selectClass(this)">B組</button>
+          <button class="class-btn" data-value="C組" onclick="App.selectClass(this)">C組</button>
+          <button class="class-btn" data-value="D組" onclick="App.selectClass(this)">D組</button>
+          <button class="class-btn" data-value="E組" onclick="App.selectClass(this)">E組</button>
+          <button class="class-btn" data-value="F組" onclick="App.selectClass(this)">F組</button>
+          <button class="class-btn" data-value="G組" onclick="App.selectClass(this)">G組</button>
+          <button class="class-btn" data-value="H組" onclick="App.selectClass(this)">H組</button>
+        </div>
 
         <label class="login-label" for="login-num">出席番号</label>
         <input type="number" id="login-num" class="login-input"

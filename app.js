@@ -227,10 +227,16 @@ const App = (() => {
   // ---------------------------------------------------------------
   function showLogin() { showScreen('screen-login'); }
 
+  function selectClass(btn) {
+    document.querySelectorAll('#class-selector .class-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+  }
+
   function submitLogin() {
-    const cls = (document.getElementById('login-class').value || '').trim();
+    const selectedBtn = document.querySelector('#class-selector .class-btn.selected');
+    const cls = selectedBtn ? selectedBtn.dataset.value : '';
     const num = (document.getElementById('login-num').value || '').trim();
-    if (!cls) { showToast('クラスを入力してください'); return; }
+    if (!cls) { showToast('クラスを選択してください'); return; }
     if (!num) { showToast('出席番号を入力してください'); return; }
     currentUser = { cls, num };
     localStorage.setItem('er_user', JSON.stringify(currentUser));
@@ -244,9 +250,8 @@ const App = (() => {
     localStorage.removeItem('er_user');
     closeSettings();
     // ログイン画面に戻る（入力フィールドをリセット）
-    const clsEl = document.getElementById('login-class');
+    document.querySelectorAll('#class-selector .class-btn').forEach(b => b.classList.remove('selected'));
     const numEl = document.getElementById('login-num');
-    if (clsEl) clsEl.value = '';
     if (numEl) numEl.value = '';
     showLogin();
     showToast('ログアウトしました');
@@ -1380,7 +1385,7 @@ Format exactly as:
     // 画面遷移
     showLessonSelect, selectLesson, showModeMap, showFeedback,
     // ログイン
-    submitLogin, logout,
+    selectClass, submitLogin, logout,
     // クイズ
     startMode,
     flashcardEval, selectOption, revealTranslation,
