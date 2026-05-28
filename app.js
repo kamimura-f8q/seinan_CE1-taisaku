@@ -523,7 +523,7 @@ const App = (() => {
     content.innerHTML = `
       <p class="instruction-label">空欄に入る語を選びなさい</p>
       <p class="question-text">${display}</p>
-      <p class="hint-label">💡 意味：${q.ja}</p>
+      <p class="hint-label">🇯🇵 ${q.exampleJa}</p>
       <div class="options-list">
         ${opts.map((o, i) => `
           <button class="option-btn" onclick="App.selectOption(this,${o.toLowerCase()===q.exampleAnswer.toLowerCase()},'${escHtml(q.exampleAnswer)}')">
