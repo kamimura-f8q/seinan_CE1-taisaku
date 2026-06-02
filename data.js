@@ -1,330 +1,582 @@
 /* =====================================================================
-   All Aboard 英語復習ツール — Lesson Data
-   教科書: All Aboard! English Communication II
+   英語復習ツール — Lesson Data
+   教科書: Revised COMET English Communication I
    ===================================================================== */
 
 const LESSONS = [
 
   // ================================================================
-  // LESSON 01  A Colorful Island
+  // LESSON 01  From the Window of the Shinkansen
   // ================================================================
   {
     id: 1,
     title: "Lesson 1",
-    subtitle: "A Colorful Island",
+    subtitle: "From the Window of the Shinkansen",
 
+    // ------ 単語 ------
     vocabulary: [
-      // Part 1
-      { en: "spring vacation", ja: "春休み",              example: "I went to Kyoto during the ___ last year.",                      exampleAnswer: "spring vacation", exampleJa: "去年の春休みに京都に行きました。" },
-      { en: "visit",           ja: "訪れる",              example: "I would like to ___ New Zealand someday.",                       exampleAnswer: "visit",           exampleJa: "いつかニュージーランドを訪れてみたいです。" },
-      { en: "island",          ja: "島",                  example: "Okinawa is a beautiful ___ in the south of Japan.",              exampleAnswer: "island",          exampleJa: "沖縄は日本の南にある美しい島です。" },
-      { en: "by oneself",      ja: "一人で",              example: "She traveled abroad ___ for the first time.",                    exampleAnswer: "by oneself",      exampleJa: "彼女は初めて一人で海外旅行をしました。" },
-      { en: "water-bus",       ja: "水上バス",             example: "We crossed the canal by ___ on our trip.",                      exampleAnswer: "water-bus",       exampleJa: "旅行中、私たちは水上バスで運河を渡りました。" },
-      { en: "breeze",          ja: "そよ風",              example: "A cool ___ blew through the open window.",                      exampleAnswer: "breeze",          exampleJa: "涼しいそよ風が開いた窓から吹き込んできました。" },
-      { en: "salty",           ja: "塩辛い",              example: "This soup is a little too ___ for me.",                         exampleAnswer: "salty",           exampleJa: "このスープは私には少し塩辛すぎます。" },
-      { en: "arrive",          ja: "到着する",             example: "What time did you ___ at the airport?",                         exampleAnswer: "arrive",          exampleJa: "何時に空港に到着しましたか？" },
-      { en: "be surprised",    ja: "驚く",                example: "I ___ to hear the good news about my friend.",                  exampleAnswer: "was surprised",   exampleJa: "友達についての嬉しい知らせを聞いて驚きました。" },
-      { en: "colorful",        ja: "カラフルな",           example: "She wore a ___ scarf to the festival.",                         exampleAnswer: "colorful",        exampleJa: "彼女はお祭りにカラフルなスカーフをしていきました。" },
-      { en: "different from",  ja: "～と違う",             example: "My taste in music is quite ___ my sister's.",                   exampleAnswer: "different from",  exampleJa: "私の音楽の好みは姉とはかなり違います。" },
-      { en: "scenery",         ja: "景色",                example: "The ___ from the mountaintop was breathtaking.",                 exampleAnswer: "scenery",         exampleJa: "山頂からの景色は息をのむほどでした。" },
-      // Part 2
-      { en: "souvenir shop",   ja: "お土産屋",             example: "I stopped by a ___ to buy gifts for my family.",                exampleAnswer: "souvenir shop",   exampleJa: "家族へのお土産を買うためにお土産屋に立ち寄りました。" },
-      { en: "lace",            ja: "レース（手芸）",        example: "My grandmother makes beautiful ___ tablecloths by hand.",       exampleAnswer: "lace",            exampleJa: "祖母は美しいレースのテーブルクロスを手で作ります。" },
-      { en: "be famous for",   ja: "～で有名",             example: "Kyoto ___ its beautiful old temples and gardens.",              exampleAnswer: "is famous for",   exampleJa: "京都は美しい古いお寺や庭園で有名です。" },
-      { en: "product",         ja: "製品",                example: "This factory makes high-quality electronic ___s.",               exampleAnswer: "products",        exampleJa: "この工場は高品質の電子製品を作っています。" },
-      { en: "thick",           ja: "濃い",                example: "A ___ fog covered the entire city this morning.",                exampleAnswer: "thick",           exampleJa: "今朝、濃い霧が街全体を覆いました。" },
-      { en: "fog",             ja: "霧",                  example: "It was difficult to drive in the heavy ___ last night.",        exampleAnswer: "fog",             exampleJa: "昨夜の濃い霧の中での運転は大変でした。" },
-      { en: "fisherman",       ja: "漁師",                example: "The old ___ caught many fish before sunrise.",                  exampleAnswer: "fisherman",       exampleJa: "その老いた漁師は日の出前にたくさんの魚を捕りました。" },
-      { en: "have trouble -ing", ja: "～するのに苦労する",  example: "I ___ waking up early in the morning.",                        exampleAnswer: "have trouble",    exampleJa: "私は朝早く起きることに苦労しています。" },
-      { en: "offshore",        ja: "沖合いで",             example: "The fishing boats went far ___ to catch tuna.",                 exampleAnswer: "offshore",        exampleJa: "漁船はマグロを捕まえるために沖合い遠くへ出ていきました。" },
-      { en: "vivid",           ja: "鮮やかな",             example: "The sunset painted the sky in ___ shades of orange and red.",   exampleAnswer: "vivid",           exampleJa: "夕日が空を鮮やかなオレンジと赤に染めました。" },
-      { en: "return",          ja: "戻る",                example: "I plan to ___ home before dinner tonight.",                     exampleAnswer: "return",          exampleJa: "今夜は夕食前に家に戻る予定です。" },
-      { en: "safely",          ja: "安全に",              example: "All the passengers arrived ___ at the destination.",            exampleAnswer: "safely",          exampleJa: "すべての乗客が目的地に安全に到着しました。" },
+      { en: "travel",     ja: "旅行する",           example: "I ___ by Shinkansen from Osaka to Tokyo.",           exampleAnswer: "traveled",  exampleJa: "私は新幹線で大阪から東京へ旅行しました。" },
+      { en: "window",     ja: "窓",                 example: "From the ___, I enjoyed many wonderful views.",       exampleAnswer: "window",    exampleJa: "窓から、すばらしい景色をたくさん楽しみました。" },
+      { en: "wonderful",  ja: "すばらしい",          example: "From the window, I enjoyed many ___ views.",         exampleAnswer: "wonderful", exampleJa: "窓から、すばらしい景色をたくさん楽しみました。" },
+      { en: "view",       ja: "景色",               example: "From the window, I enjoyed many wonderful ___.",      exampleAnswer: "views",     exampleJa: "窓から、すばらしい景色をたくさん楽しみました。" },
+      { en: "tower",      ja: "塔",                 example: "In Kyoto, I saw the five-story ___, Gojunoto.",      exampleAnswer: "tower",     exampleJa: "京都では、五重塔（ごじゅうのとう）を見ました。" },
+      { en: "castle",     ja: "城",                 example: "On the way to Nagoya, there was a ___.",             exampleAnswer: "castle",    exampleJa: "名古屋へ向かう途中にお城がありました。" },
+      { en: "check",      ja: "～を確認する",        example: "I ___ the map and found it was Kiyosu Castle.",      exampleAnswer: "checked",   exampleJa: "地図を確認したら、それは清洲城でした。" },
+      { en: "map",        ja: "地図",               example: "I checked the ___ to find the name of the castle.",  exampleAnswer: "map",       exampleJa: "地図を確認して、お城の名前を調べました。" },
+      { en: "also",       ja: "～もまた，さらに",    example: "I ___ saw Mt. Fuji in Shizuoka.",                   exampleAnswer: "also",      exampleJa: "静岡では富士山も見ました。" },
+      { en: "beautiful",  ja: "美しい",             example: "Mt. Fuji was so ___!",                               exampleAnswer: "beautiful", exampleJa: "富士山はとても美しかったです！" },
+      { en: "turn",       ja: "順番",               example: "Now it's your ___.",                                exampleAnswer: "turn",      exampleJa: "今度はあなたの番です。" },
+      { en: "experience", ja: "経験",               example: "Tell us about your ___ during vacation.",            exampleAnswer: "experience",exampleJa: "休みの間の経験について話してください。" },
+      { en: "vacation",   ja: "休暇，休み",          example: "Tell us about your experiences during ___.",         exampleAnswer: "vacation",  exampleJa: "休みの間の経験について話してください。" },
     ],
 
+    // ------ 本文 ------
     texts: [
       {
         id: "original",
         label: "本文",
         isRewrite: false,
         sentences: [
-          { en: "During the spring vacation, I went to Italy with my family and I visited the island of Burano by myself.", ja: "春休みに、私は家族とイタリアへ行き、一人でブラーノ島を訪れました。" },
-          { en: "It took 40 minutes to get to the island by water-bus from Venice.", ja: "ヴェネチアから水上バスで島に着くまでに40分かかりました。" },
-          { en: "The sea breeze was salty but cool!", ja: "海のそよ風は塩辛かったですが涼しかったです！" },
-          { en: "When I arrived, I was surprised because the houses were so colorful.", ja: "到着したとき、家がとてもカラフルだったので私は驚きました。" },
-          { en: "They were very different from those in my country, Japan.", ja: "それらは私の国、日本のものとはとても違っていました。" },
-          { en: "I thought to myself, \"This scenery is just what I wanted to see!\"", ja: "私は心の中で思いました。「この景色はまさに私が見たかったものです！」" },
-          { en: "After having lunch, I went to a souvenir shop.", ja: "昼食を食べた後、お土産屋へ行きました。" },
-          { en: "Outside, a woman was making lace.", ja: "外では、女性がレースを作っていました。" },
-          { en: "Burano is famous for its beautiful lace products.", ja: "ブラーノはその美しいレース製品で有名です。" },
-          { en: "I asked the woman about the island's colorful houses.", ja: "私はその女性に島のカラフルな家について尋ねました。" },
-          { en: "She said, \"We have thick fog in winter, so sometimes the fishermen have trouble finding their houses from offshore.", ja: "彼女は言いました。「冬には濃い霧があるので、漁師たちは沖合いから家を見つけるのに苦労することがあります。" },
-          { en: "Because of the vivid colors, they can return home safely.\"", ja: "鮮やかな色のおかげで、彼らは安全に家に帰れます。」" },
-          { en: "I really enjoyed my time on Burano.", ja: "ブラーノでの時間を本当に楽しみました。" },
+          { en: "I traveled by Shinkansen from Osaka to Tokyo.",       ja: "私は新幹線で大阪から東京へ旅行しました。" },
+          { en: "From the window, I enjoyed many wonderful views.",    ja: "窓から，すばらしい景色をたくさん楽しみました。" },
+          { en: "In Kyoto, I saw the five-story tower, Gojunoto.",    ja: "京都では，五重塔を見ました。" },
+          { en: "On the way to Nagoya, there was a castle.",          ja: "名古屋へ向かう途中にお城がありました。" },
+          { en: "I checked the map, and it was Kiyosu Castle.",       ja: "地図を確認したら，それは清洲城でした。" },
+          { en: "I also saw Mt. Fuji in Shizuoka.",                  ja: "静岡では富士山も見ました。" },
+          { en: "It was so beautiful!",                               ja: "それはとても美しかったです！" },
+          { en: "I took pictures of it.",                             ja: "私はそれの写真を撮りました。" },
+          { en: "Now it's your turn.",                                ja: "今度はみなさんの番です。" },
+          { en: "Tell us about your experiences during vacation.",    ja: "休みの間の経験について話してください。" },
+        ],
+      },
+      {
+        id: "rewrite",
+        label: "アレンジ版",
+        isRewrite: true,
+        sentences: [
+          { en: "Ms. Jones is an English teacher from Australia.",                                                           ja: "ジョーンズ先生はオーストラリア出身の英語教師です。" },
+          { en: "Last month, she took a Shinkansen trip from Osaka to Tokyo.",                                               ja: "先月，彼女は新幹線で大阪から東京への旅をしました。" },
+          { en: "She sat by the window and enjoyed the beautiful scenery along the way.",                                    ja: "彼女は窓際に座り，道中の美しい景色を楽しみました。" },
+          { en: "When the Shinkansen passed through Kyoto, she could see Gojunoto, a famous five-story tower.",             ja: "新幹線が京都を通過したとき，有名な五重塔「五重塔」が見えました。" },
+          { en: "Between Kyoto and Nagoya, she was surprised to spot an old castle.",                                        ja: "京都と名古屋の間で，彼女は古いお城を見つけて驚きました。" },
+          { en: "She checked her map and discovered it was Kiyosu Castle, built over 500 years ago.",                       ja: "地図を確認すると，それは500年以上前に建てられた清洲城だとわかりました。" },
+          { en: "The most exciting moment came in Shizuoka, when Mt. Fuji suddenly appeared outside her window.",           ja: "一番興奮した瞬間は静岡で，富士山が突然窓の外に現れたときです。" },
+          { en: "She thought it was the most beautiful mountain she had ever seen, so she took many photos.",               ja: "彼女はこれまで見た中で最も美しい山だと思い，たくさん写真を撮りました。" },
+          { en: "The whole trip took about two and a half hours, but Ms. Jones felt it was too short.",                     ja: "旅全体で約2時間半かかりましたが，ジョーンズ先生には短すぎると感じました。" },
+          { en: "She says she wants to travel by Shinkansen again someday.",                                                 ja: "彼女はいつかまた新幹線で旅したいと言っています。" },
         ],
       },
     ],
 
+    // ------ 内容確認問題（TF問題集・Q&A集・定期考査よりアレンジ） ------
     comprehensionQuestions: [
-      { question: "Jun visited Burano with his family.", type: "truefalse", answer: false },
-      { question: "Jun went to Italy with his family.", type: "truefalse", answer: true },
-      { question: "It took 30 minutes to get to Burano from Venice.", type: "truefalse", answer: false },
-      { question: "Jun was surprised because the houses were so colorful.", type: "truefalse", answer: true },
-      { question: "The houses in Burano looked similar to those in Japan.", type: "truefalse", answer: false },
-      { question: "Burano is famous for its beautiful lace products.", type: "truefalse", answer: true },
-      { question: "The fishermen paint their houses vivid colors just for tourists.", type: "truefalse", answer: false },
-      { question: "Because of the vivid colors, the fishermen can return home safely in thick fog.", type: "truefalse", answer: true },
+      // TF問題集より
+      { question: "Ms. Jones went from Osaka to Tokyo by Shinkansen.", type: "truefalse", answer: true },
+      { question: "Ms. Jones took a plane from Osaka to Tokyo.", type: "truefalse", answer: false },
+      { question: "On the Shinkansen, Ms. Jones enjoyed views from the window.", type: "truefalse", answer: true },
+      { question: "Because it rained, Ms. Jones did not enjoy the views very much.", type: "truefalse", answer: false },
+      { question: "Ms. Jones read some books about Japan on the Shinkansen.", type: "truefalse", answer: false },
+      { question: "In Kyoto, Ms. Jones saw Gojunoto.", type: "truefalse", answer: true },
+      { question: "Ms. Jones saw a castle on the way to Nagoya.", type: "truefalse", answer: true },
+      { question: "The name of the castle was not on the map.", type: "truefalse", answer: false },
+      { question: "Ms. Jones asked her friend for the name of the castle.", type: "truefalse", answer: false },
+      { question: "The name of the castle was Kiyosu Castle.", type: "truefalse", answer: true },
+      { question: "In Shizuoka, Ms. Jones saw Mt. Fuji and took pictures of it.", type: "truefalse", answer: true },
+      { question: "Because Mt. Fuji was beautiful, Ms. Jones drew a picture of it.", type: "truefalse", answer: false },
+      { question: "Mt. Fuji looked beautiful to Ms. Jones.", type: "truefalse", answer: true },
+      // 定期考査用問題よりアレンジ
+      { question: "Ms. Jones liked her trip on the Shinkansen.", type: "truefalse", answer: true },
+      { question: "Ms. Jones saw the five-story tower in Shizuoka.", type: "truefalse", answer: false },
+      // Q&A集よりアレンジ（選択式）
       {
-        question: "How did Jun travel from Venice to the island of Burano?",
+        question: "How did Ms. Jones travel from Osaka to Tokyo?",
         type: "multiple",
-        options: ["By train", "By water-bus", "By plane", "By car"],
+        options: ["By plane", "By Shinkansen", "By bus", "By car"],
         answer: 1,
       },
       {
-        question: "Why was Jun surprised when he arrived on Burano?",
+        question: "What did Ms. Jones see in Kyoto?",
         type: "multiple",
-        options: ["Because the island was very small", "Because the fog was very thick", "Because the houses were so colorful", "Because there were many tourists"],
+        options: ["Kiyosu Castle", "Mt. Fuji", "The five-story tower, Gojunoto", "A dictionary"],
         answer: 2,
       },
       {
-        question: "What is Burano famous for?",
+        question: "How did Ms. Jones know the name of the castle?",
         type: "multiple",
-        options: ["Its colorful water-buses", "Its seafood restaurants", "Its beautiful lace products", "Its thick fog in winter"],
-        answer: 2,
-      },
-      {
-        question: "Why do the fishermen sometimes have trouble finding their houses?",
-        type: "multiple",
-        options: ["Because the streets are dark", "Because of the thick fog in winter", "Because all the houses look the same color", "Because they live far from the port"],
+        options: ["She asked her friend.", "She checked the map.", "She looked it up online.", "She already knew it."],
         answer: 1,
       },
       {
-        question: "How can the fishermen find their houses even in thick fog?",
-        type: "multiple",
-        options: ["They use GPS devices", "They ask other fishermen for help", "Because of the vivid colors of the houses", "They follow the sound of the sea"],
-        answer: 2,
+        question: "ジョーンズ先生が大阪から東京に行くまでに見たものを英語で３つ答えなさい。",
+        type: "text",
+        answer: "Gojunoto, Kiyosu Castle, Mt. Fuji",
+        keywords: ["gojunoto", "kiyosu", "fuji"],
       },
       {
-        question: "What does 'what' mean in the phrase 'just what I wanted to see'?",
+        question: "What did Ms. Jones do when she saw Mt. Fuji?",
         type: "multiple",
-        options: ["the colorful water-bus", "the souvenir shop", "the scenery Jun had wanted to see", "the famous lace products"],
-        answer: 2,
-      },
-      {
-        question: "Where did Jun go after having lunch?",
-        type: "multiple",
-        options: ["Back to Venice", "To a restaurant", "To a souvenir shop", "To the harbor"],
-        answer: 2,
+        options: ["She drew a picture.", "She took pictures of it.", "She wrote about it.", "She called her friend."],
+        answer: 1,
       },
     ],
 
+    // ------ アレンジ版問題（英問英答） ------
+    rewriteQuestions: [
+      { type: "truefalse", question: "Ms. Jones is an English teacher from Australia.", answer: true },
+      { type: "truefalse", question: "Ms. Jones traveled from Tokyo to Osaka by Shinkansen.", answer: false },
+      { type: "multiple",
+        question: "What could Ms. Jones see when the Shinkansen passed through Kyoto?",
+        options: ["Kiyosu Castle", "Mt. Fuji", "Gojunoto, a famous five-story tower", "A rice field"],
+        answer: 2 },
+      { type: "underline",
+        passage: "She checked her map and discovered it was Kiyosu Castle, <u>built over 500 years ago</u>.",
+        question: "What does the underlined phrase tell us about Kiyosu Castle?",
+        options: ["It is a very new building", "It is a very old castle", "It was built by Ms. Jones", "It is located in Kyoto"],
+        answer: 1 },
+      { type: "truefalse", question: "Ms. Jones thought Mt. Fuji was the most beautiful mountain she had ever seen.", answer: true },
+      { type: "multiple",
+        question: "How did Ms. Jones feel about the Shinkansen trip?",
+        options: ["She thought it was too long.", "She felt it was too short.", "She was bored during the trip.", "She was scared of the speed."],
+        answer: 1 },
+    ],
+
+    // ------ 文法 ------
     grammar: {
       rules: [
         {
-          title: "what「～すること・もの」（名詞節）",
-          explanation: "what は「～すること・もの」という意味で名詞のカタマリをつくります。\n先行詞を含む関係代名詞とも呼ばれます。\n\n【文の主語になる】\nWhat I want is soccer.\n→「私が欲しいものはサッカーボールです。」\n\n【文の補語・目的語になる】\nThis is what I wanted to see.\n→「これは私が見たかったものです。」\n\nI know what she made.\n→「私は彼女が作ったものを知っています。」",
+          title: "過去形① — be動詞",
+          explanation: "過去の状態を表すときは be動詞を過去形にします。\nam / is → was　　are → were\n\n【否定】was / were not（wasn't / weren't）\n【疑問】Was / Were ＋ 主語 ～?",
           examples: [
-            { en: "This scenery is just what I wanted to see!", ja: "この景色はまさに私が見たかったものです！" },
-            { en: "What surprised me was the colorful houses.", ja: "私を驚かせたのはカラフルな家でした。" },
-            { en: "What I used to get to the island was a water-bus.", ja: "島に着くために使ったのは水上バスでした。" },
-            { en: "What I liked most was the scenery.", ja: "私が最も気に入ったのは景色でした。" },
+            { en: "It was so beautiful!", ja: "それはとても美しかったです！" },
+            { en: "Emi was in Spain last year.", ja: "エミは去年スペインにいました。" },
+            { en: "Were you tired yesterday?", ja: "あなたはきのう疲れていましたか。" },
+            { en: "Bill wasn't at home last Sunday.", ja: "ビルはこの前の日曜日に家にいませんでした。" },
+          ],
+        },
+        {
+          title: "過去形② — 一般動詞",
+          explanation: "過去の動作を表すときは動詞を過去形にします。\n規則変化：play → played　study → studied\n不規則変化：go → went　see → saw　take → took\n\n【否定】did not（didn't）＋ 動詞の原形\n【疑問】Did ＋ 主語 ＋ 動詞の原形 ～?",
+          examples: [
+            { en: "I traveled by Shinkansen from Osaka to Tokyo.", ja: "私は新幹線で大阪から東京へ旅行しました。" },
+            { en: "I checked the map, and it was Kiyosu Castle.", ja: "地図を確認したら，それは清洲城でした。" },
+            { en: "I didn't do my homework yesterday.", ja: "きのう私は宿題をしませんでした。" },
+            { en: "Did Mao call you this morning?", ja: "マオは今朝あなたに電話しましたか。" },
           ],
         },
       ],
 
+      // 提出用レポート問題10・ベーシックノート・定期考査よりアレンジ
       fillBlanks: [
-        { instruction: "（　）に What または what を入れなさい。", sentence: "___ I wanted to see was the colorful scenery.", answer: "What", hint: "「私が見たかったもの」→ What を文頭に（文の主語になる）" },
-        { instruction: "（　）に What または what を入れなさい。", sentence: "This scenery is just ___ I wanted to see!", answer: "what", hint: "「私が見たかったもの」→ what（補語：just の後ろ）" },
-        { instruction: "（　）に What または what を入れなさい。", sentence: "___ surprised me was the colorful houses.", answer: "What", hint: "「私を驚かせたもの」→ What を文頭に（文の主語）" },
-        { instruction: "（　）に What または what を入れなさい。", sentence: "___ I used to get to the island was a water-bus.", answer: "What", hint: "「私が島に着くために使ったもの」→ What を文頭に" },
-        { instruction: "（　）に What または what を入れなさい。", sentence: "I know ___ she was making outside the shop.", answer: "what", hint: "「彼女が作っていたもの」→ know の目的語になる what" },
-        { instruction: "（　）に What または what を入れなさい。", sentence: "___ makes Burano special is its vivid colors.", answer: "What", hint: "「ブラーノを特別にするもの」→ What を文頭に（主語）" },
-        { instruction: "（　）に What または what を入れなさい。", sentence: "Tell me ___ you want to visit someday.", answer: "what", hint: "「あなたが訪れたいもの（場所）」→ tell の目的語 what" },
-        { instruction: "（　）に What または what を入れなさい。", sentence: "___ we have in winter is thick fog.", answer: "What", hint: "「私たちが冬にもつもの」→ What を文頭に（主語）" },
+        { instruction: "( )内から適切なものを選びなさい。", sentence: "ケンはきのうサッカーをしました。\nKen ___ soccer yesterday.  ( plays / played )", answer: "played", hint: "「きのう」→ 過去形。play の過去形は played" },
+        { instruction: "( )内から適切なものを選びなさい。", sentence: "サキは今朝学校に行きました。\nSaki ___ to school this morning.  ( goes / went )", answer: "went", hint: "go の過去形は went（不規則変化）" },
+        { instruction: "( )内から適切なものを選びなさい。", sentence: "あのTシャツはかわいい。\nThat T-shirt ___ cute.  ( is / was )", answer: "is", hint: "現在の状態 → 現在形の is" },
+        { instruction: "( )に適切な語を入れなさい。", sentence: "あなたは先週忙しかったですか。\n___ you busy last week?", answer: "Were", hint: "be動詞の過去疑問文：Were / Was ＋ 主語？" },
+        { instruction: "( )に適切な語を入れなさい。", sentence: "きのう私は宿題をしませんでした。\nI ___ do my homework yesterday.", answer: "didn't", hint: "一般動詞の過去否定：didn't ＋ 動詞の原形" },
+        { instruction: "( )に適切な語を入れなさい。", sentence: "マオは今朝あなたに電話しましたか。\n___ Mao call you this morning?", answer: "Did", hint: "一般動詞の過去疑問文：Did ＋ 主語 ＋ 動詞の原形？" },
+        { instruction: "( )内から適切なものを選びなさい。", sentence: "ビルはこの前の日曜日に家にいませんでした。\nBill ___ at home last Sunday.  ( didn't / wasn't )", answer: "wasn't", hint: "「家にいなかった」→ be動詞の否定 wasn't" },
+        { instruction: "( )内から適切なものを選びなさい。", sentence: "あなたは英語を話しますか。\n___ you speak English?  ( Do / Did )", answer: "Do", hint: "「話しますか」は現在の習慣 → Do" },
+        { instruction: "( )内から適切なものを選びなさい。", sentence: "木のそばに古い自転車が１台ありました。\nThere ___ an old bike by the tree.  ( is / was )", answer: "was", hint: "「ありました」→ 過去 was" },
+        { instruction: "( )に適切な語を入れなさい。", sentence: "エマは今朝，公園に行きました。\nEmma ___ to the park this morning.", answer: "went", hint: "go の過去形は went" },
+        { instruction: "( )に適切な語を入れなさい。", sentence: "ケンタとトムはきのう忙しかった。\nKenta and Tom ___ busy yesterday.", answer: "were", hint: "複数の主語 → were" },
+        { instruction: "( )に適切な語を入れなさい。（2語）", sentence: "アヤはこの前の日曜日にテニスをしましたか。\n___ Aya ___ tennis last Sunday?", answer: "Did play", hint: "Did ＋ 主語 ＋ 動詞の原形？" },
       ],
 
+      // 定期考査・提出用レポートよりアレンジ
       rearrange: [
-        { instruction: "語句を並べ替えて正しい英文を作りなさい。", words: ["What", "surprised", "me", "was", "the", "colorful", "houses"], answer: "what surprised me was the colorful houses", ja: "私を驚かせたのはカラフルな家でした。" },
-        { instruction: "語句を並べ替えて正しい英文を作りなさい。", words: ["What", "I", "visited", "was", "the", "island", "of", "Burano"], answer: "what i visited was the island of burano", ja: "私が訪れたのはブラーノ島でした。" },
-        { instruction: "語句を並べ替えて正しい英文を作りなさい。", words: ["just", "This", "scenery", "is", "I", "what", "wanted", "to", "see"], answer: "this scenery is just what i wanted to see", ja: "この景色はまさに私が見たかったものです。" },
-        { instruction: "語句を並べ替えて正しい英文を作りなさい。", words: ["What", "I", "liked", "most", "was", "the", "scenery"], answer: "what i liked most was the scenery", ja: "私が最も気に入ったのは景色でした。" },
-        { instruction: "語句を並べ替えて正しい英文を作りなさい。", words: ["Tell", "me", "what", "you", "want", "to", "visit"], answer: "tell me what you want to visit", ja: "あなたが訪れたい場所を教えてください。" },
-        { instruction: "語句を並べ替えて正しい英文を作りなさい。", words: ["What", "she", "was", "making", "was", "lace"], answer: "what she was making was lace", ja: "彼女が作っていたものはレースでした。" },
+        { instruction: "語句を並べ替えて正しい英文を作りなさい。", words: ["traveled", "I", "by", "Shinkansen", "from", "Osaka", "to", "Tokyo"], answer: "i traveled by shinkansen from osaka to tokyo", ja: "私は新幹線で大阪から東京へ旅行しました。" },
+        { instruction: "語句を並べ替えて正しい英文を作りなさい。", words: ["checked", "I", "the", "map", "and", "it", "was", "Kiyosu", "Castle"], answer: "i checked the map and it was kiyosu castle", ja: "地図を確認したら，それは清洲城でした。" },
+        { instruction: "語句を並べ替えて正しい英文を作りなさい。", words: ["Were", "you", "busy", "last", "week"], answer: "were you busy last week", ja: "あなたは先週忙しかったですか。" },
+        { instruction: "語句を並べ替えて正しい英文を作りなさい。", words: ["Did", "Aya", "play", "tennis", "last", "Sunday"], answer: "did aya play tennis last sunday", ja: "アヤはこの前の日曜日にテニスをしましたか。" },
+        { instruction: "語句を並べ替えて正しい英文を作りなさい。", words: ["saw", "I", "Mt.", "Fuji", "also", "in", "Shizuoka"], answer: "i also saw mt. fuji in shizuoka", ja: "静岡では富士山も見ました。" },
+        { instruction: "語句を並べ替えて正しい英文を作りなさい。", words: ["Nagoya", "On", "the", "way", "to", "there", "was", "a", "castle"], answer: "on the way to nagoya there was a castle", ja: "名古屋へ向かう途中にお城がありました。" },
       ],
 
+      // 定期考査問題7・ベーシックノートTRY!よりアレンジ
       composition: [
-        { prompt: "「私が最も好きなものは音楽です」という英文を書きなさい。", hint: "What I like most is ...", modelAnswer: "What I like most is music." },
-        { prompt: "「私が行きたい場所は京都です」という英文を書きなさい。", hint: "What I want to visit is ...", modelAnswer: "What I want to visit is Kyoto." },
-        { prompt: "「彼女を驚かせたのはその景色でした」という英文を書きなさい。", hint: "What surprised ... was ...", modelAnswer: "What surprised her was the scenery." },
-        { prompt: "「私が島に着くために使ったのは水上バスでした」という英文を書きなさい。", hint: "What I used to get to the island was ...", modelAnswer: "What I used to get to the island was a water-bus." },
+        { prompt: "「私はきのう図書館で勉強しました」という内容の英文を書きなさい。", hint: "study → studied / in the library / yesterday", modelAnswer: "I studied in the library yesterday." },
+        { prompt: "「新幹線の窓から，私は富士山を見ました」という内容の英文を書きなさい。", hint: "From the window of the Shinkansen, / see → saw", modelAnswer: "From the window of the Shinkansen, I saw Mt. Fuji." },
+        { prompt: "「アキは今朝バスに乗り遅れました」という内容の英文を書きなさい。", hint: "miss → missed / the bus / this morning", modelAnswer: "Aki missed the bus this morning." },
+        { prompt: "「あなたはこの前の週末に何をしましたか」という疑問文を書きなさい。", hint: "What / did / do / last weekend？", modelAnswer: "What did you do last weekend?" },
       ],
     },
   },
 
   // ================================================================
-  // LESSON 02  With the Beatles
+  // LESSON 02  Miniature Art: The World of Tanaka Tatsuya
   // ================================================================
   {
     id: 2,
     title: "Lesson 2",
-    subtitle: "With the Beatles",
+    subtitle: "Miniature Art: The World of Tanaka Tatsuya",
 
+    // ------ 単語 ------
     vocabulary: [
-      // Part 1
-      { en: "disc jockey",    ja: "ディスクジョッキー（DJ）",  example: "The ___ at the radio station played popular songs all day.",        exampleAnswer: "disc jockey",  exampleJa: "ラジオ局のDJは一日中人気曲を流していました。" },
-      { en: "request",        ja: "リクエスト、要望",          example: "Can I make a ___ for my favorite song?",                            exampleAnswer: "request",      exampleJa: "お気に入りの曲をリクエストしてもいいですか？" },
-      { en: "present",        ja: "贈り物",                  example: "He gave her a beautiful ___ on her birthday.",                      exampleAnswer: "present",      exampleJa: "彼は彼女の誕生日に美しい贈り物をあげました。" },
-      { en: "grandma",        ja: "おばあちゃん",              example: "My ___ taught me how to make traditional Japanese sweets.",         exampleAnswer: "grandma",      exampleJa: "おばあちゃんが伝統的な和菓子の作り方を教えてくれました。" },
-      { en: "absolutely",     ja: "もちろん！",               example: "___, I will come to your birthday party!",                          exampleAnswer: "Absolutely",   exampleJa: "もちろん、誕生日パーティーに行きますよ！" },
-      { en: "remind A of B",  ja: "AにBを思い出させる",        example: "This old photo ___ me ___ my childhood.",                          exampleAnswer: "reminds / of", exampleJa: "この古い写真は私に子供の頃を思い出させます。" },
-      { en: "grandpa",        ja: "おじいちゃん",              example: "My ___ used to tell me exciting stories every night.",              exampleAnswer: "grandpa",      exampleJa: "おじいちゃんは毎晩ワクワクするお話をしてくれました。" },
-      { en: "sang",           ja: "歌った（singの過去形）",     example: "She ___ a beautiful song at the school concert.",                   exampleAnswer: "sang",         exampleJa: "彼女は学校のコンサートで美しい歌を歌いました。" },
-      { en: "birthday",       ja: "誕生日",                  example: "We are planning a surprise party for his ___.",                     exampleAnswer: "birthday",     exampleJa: "彼の誕生日にサプライズパーティーを計画しています。" },
-      { en: "precious",       ja: "大切な、貴重な",            example: "This old letter is very ___ to me.",                               exampleAnswer: "precious",     exampleJa: "この古い手紙は私にとってとても大切です。" },
-      { en: "wonderful",      ja: "すばらしい",               example: "The sunset view from the hill was truly ___.",                     exampleAnswer: "wonderful",    exampleJa: "丘からの夕日の眺めは本当に素晴らしかったです。" },
-      { en: "guess",          ja: "～だと思う",               example: "I ___ it will be sunny tomorrow.",                                  exampleAnswer: "guess",        exampleJa: "明日は晴れると思います。" },
-      { en: "musician",       ja: "音楽家",                  example: "She dreams of becoming a famous ___ when she grows up.",            exampleAnswer: "musician",     exampleJa: "彼女は大きくなったら有名な音楽家になることを夢見ています。" },
-      // Part 2
-      { en: "legendary",      ja: "伝説的な",                example: "He is a ___ athlete who broke many world records.",                  exampleAnswer: "legendary",    exampleJa: "彼は多くの世界記録を破った伝説的なアスリートです。" },
-      { en: "British",        ja: "イギリスの",               example: "I enjoy drinking ___ tea with milk in the afternoon.",              exampleAnswer: "British",      exampleJa: "午後にミルク入りのイギリスのお茶を飲むのが好きです。" },
-      { en: "debut",          ja: "デビュー",                example: "The young singer's ___ album sold over a million copies.",          exampleAnswer: "debut",        exampleJa: "その若い歌手のデビューアルバムは100万枚以上売れました。" },
-      { en: "actually",       ja: "実際に",                  example: "___, I have never eaten natto before.",                             exampleAnswer: "Actually",     exampleJa: "実は、私は納豆を食べたことがありません。" },
-      { en: "occupy",         ja: "占める",                  example: "The new café ___ the first floor of the building.",                 exampleAnswer: "occupies",     exampleJa: "新しいカフェがビルの1階を占めています。" },
-      { en: "hit chart",      ja: "ヒットチャート",            example: "Their new song reached the top of the ___ in just one week.",      exampleAnswer: "hit chart",    exampleJa: "彼らの新曲はわずか1週間でヒットチャートのトップになりました。" },
-      { en: "amazing",        ja: "驚くべき、すごい",          example: "You did an ___ job on this science project!",                      exampleAnswer: "amazing",      exampleJa: "この理科の実験で素晴らしい仕事をしましたね！" },
-      { en: "record",         ja: "記録",                   example: "She broke the school ___ in the 100-meter race.",                   exampleAnswer: "record",       exampleJa: "彼女は100メートル走で学校記録を破りました。" },
-      { en: "exactly",        ja: "まさに、そのとおり",         example: "___, that is what I was thinking!",                                exampleAnswer: "Exactly",      exampleJa: "まさにそれが私が考えていたことです！" },
-      { en: "always",         ja: "いつも",                  example: "He ___ wears a hat when he goes outside.",                         exampleAnswer: "always",       exampleJa: "彼は外出するとき、いつも帽子をかぶっています。" },
-      { en: "cheer A up",     ja: "Aを元気づける",            example: "Your kind words really ___ me up.",                                exampleAnswer: "cheer",        exampleJa: "あなたの優しい言葉が本当に私を元気づけてくれました。" },
+      { en: "children",   ja: "子どもたち",         example: "___ are climbing up a tree with a ladder.",         exampleAnswer: "Children",   exampleJa: "子どもたちがはしごを使って木に登っています。" },
+      { en: "climb",      ja: "～に登る",           example: "Children are ___ing up a tree with a ladder.",      exampleAnswer: "climbing",   exampleJa: "子どもたちがはしごを使って木に登っています。" },
+      { en: "ladder",     ja: "はしご",             example: "Children are climbing up a tree with a ___.",       exampleAnswer: "ladder",     exampleJa: "子どもたちははしごを使って木に登っています。" },
+      { en: "broccoli",   ja: "ブロッコリー",        example: "Wait, it's not a tree. It's ___!",                  exampleAnswer: "broccoli",   exampleJa: "待って、それは木じゃない。ブロッコリーです！" },
+      { en: "dictionary", ja: "辞書",               example: "No, the runners are on a ___!",                     exampleAnswer: "dictionary", exampleJa: "いいえ、ランナーたちは辞書の上にいます！" },
+      { en: "creative",   ja: "創造的な",           example: "Tanaka Tatsuya made these ___ miniature artworks.", exampleAnswer: "creative",   exampleJa: "田中達也はこれらの創造的なミニチュア芸術作品を作りました。" },
+      { en: "miniature",  ja: "ミニチュアの",        example: "He made these creative ___ artworks.",              exampleAnswer: "miniature",  exampleJa: "彼はこれらの創造的なミニチュア芸術作品を作りました。" },
+      { en: "artwork",    ja: "芸術作品",           example: "He made these creative miniature ___.",             exampleAnswer: "artworks",   exampleJa: "彼はこれらの創造的なミニチュア芸術作品を作りました。" },
+      { en: "everyday",   ja: "日常の，ありふれた",  example: "He uses ___ objects in unique ways.",               exampleAnswer: "everyday",   exampleJa: "彼は日常的な物を独特な方法で使います。" },
+      { en: "object",     ja: "物",                 example: "He uses everyday ___ in unique ways.",              exampleAnswer: "objects",    exampleJa: "彼は日常的な物を独特な方法で使います。" },
+      { en: "unique",     ja: "独特の",             example: "He uses everyday objects in ___ ways.",             exampleAnswer: "unique",     exampleJa: "彼は日常的な物を独特な方法で使います。" },
+      { en: "feel",       ja: "～と感じる",          example: "He ___ happy when he comes up with good ideas.",   exampleAnswer: "feels",      exampleJa: "よいアイデアが浮かんだとき、彼は幸せな気持ちになります。" },
+      { en: "idea",       ja: "考え，アイデア",      example: "He feels happy when he comes up with good ___.",   exampleAnswer: "ideas",      exampleJa: "よいアイデアが浮かんだとき、彼は幸せな気持ちになります。" },
     ],
 
+    // ------ 本文 ------
     texts: [
       {
         id: "original",
         label: "本文",
         isRewrite: false,
         sentences: [
-          { en: "DJ: What's your request, Sam?", ja: "DJ：あなたのリクエスト曲は何ですか、サム？" },
-          { en: "Sam: \"In My Life\" by the Beatles. It's a present for my grandma.", ja: "サム：ビートルズの「イン・マイ・ライフ」です。おばあちゃんへの贈り物です。" },
-          { en: "DJ: Great! Does she like this song?", ja: "DJ：いいですね！彼女はこの歌が好きなのですか？" },
-          { en: "Sam: Absolutely! It reminds her of Grandpa.", ja: "サム：もちろんです！その歌は彼女におじいちゃんのことを思い出させるのです。" },
-          { en: "When they were high school students, he sang this song to her as a birthday present.", ja: "彼らが高校生だったとき、彼は誕生日の贈り物として彼女にこの歌を歌ってあげました。" },
-          { en: "To her, this song is more precious than \"Yesterday,\" \"Let It Be,\" and other famous ones.", ja: "彼女にとっては、この歌は「イエスタデイ」や「レット・イット・ビー」などの有名な曲よりも大切なのです。" },
-          { en: "DJ: What a wonderful story! I guess each person has stories about their favorite songs or musicians.", ja: "DJ：なんてすてきな話でしょう！それぞれの人にお気に入りの歌やミュージシャンについての物語があると私は思います。" },
-          { en: "DJ: Do you like the Beatles, Sam?", ja: "DJ：あなたはビートルズが好きですか、サム？" },
-          { en: "Sam: Yes. They're a legendary British band, and they're still popular today — about 60 years after their debut.", ja: "サム：はい。彼らは伝説的なイギリスのバンドで、デビューから約60年後の今日でもなお人気があります。" },
-          { en: "DJ: Right. And they were the most popular band in the world in the 1960s.", ja: "DJ：そうですね。そして彼らは1960年代に世界でいちばん人気のあるバンドでした。" },
-          { en: "Actually, in 1964, their songs occupied from No. 1 to 5 on the US hit chart.", ja: "実際に、1964年には彼らの曲がアメリカのヒットチャートで1位から5位を占めました。" },
-          { en: "Sam: Wow, what an amazing record!", ja: "サム：うわあ、なんてすごい記録でしょう！" },
-          { en: "DJ: Exactly. And my favorite Beatles song is \"Ob-La-Di, Ob-La-Da\" because it always cheers me up.", ja: "DJ：まさにそのとおりです。私のお気に入りのビートルズの歌は「オブ・ラ・ディ、オブ・ラ・ダ」です。なぜならそれはいつも私を元気づけてくれるからです。" },
+          { en: "Children are climbing up a tree with a ladder.",           ja: "子どもたちがはしごを使って木登りをしています。" },
+          { en: "Wait, it's not a tree.",                                   ja: "待って，それは木ではありません。" },
+          { en: "It's broccoli!",                                           ja: "それはブロッコリーです！" },
+          { en: "Now, look at the four runners.",                           ja: "では，４人のランナーを見てください。" },
+          { en: "Where are they?",                                          ja: "彼らはどこにいるのでしょう？" },
+          { en: "Are they running on a track?",                            ja: "彼らはトラックを走っているのでしょうか？" },
+          { en: "No, they are on a dictionary!",                            ja: "いいえ，彼らは辞書の上にいるのです！" },
+          { en: "Tanaka Tatsuya made these creative miniature artworks.",   ja: "田中達也がこれらの創造的なミニチュアの芸術作品を作りました。" },
+          { en: "He uses everyday objects in unique ways.",                 ja: "彼は日常にある物を独特な方法で使います。" },
+          { en: "He feels happy when he comes up with good ideas.",         ja: "よいアイデアを思いついたとき，彼は幸せを感じます。" },
+          { en: "He really enjoys his work.",                              ja: "彼は本当に自分の仕事を楽しんでいます。" },
+        ],
+      },
+      {
+        id: "rewrite",
+        label: "アレンジ版",
+        isRewrite: true,
+        sentences: [
+          { en: "Have you ever seen a photo of tiny people climbing what looks like a giant tree?",                         ja: "巨大な木のように見えるものをよじ登る小さな人々の写真を見たことがありますか？" },
+          { en: "Surprise — the \"tree\" is actually a piece of broccoli!",                                                ja: "驚くことに，その「木」は実はブロッコリーです！" },
+          { en: "This is the kind of art that Tanaka Tatsuya creates.",                                                    ja: "これが田中達也が作る芸術作品の一例です。" },
+          { en: "He is a miniature artist from Japan, and his photos have become famous all over the world.",              ja: "彼は日本出身のミニチュアアーティストで，その写真は世界中で有名になっています。" },
+          { en: "Tanaka uses ordinary things from daily life — vegetables, books, and other household items.",             ja: "田中は野菜，本，その他の日用品など，日常生活の身近なものを使います。" },
+          { en: "He arranges them in clever ways to make them look like a completely different world.",                    ja: "それらを巧みに組み合わせて，全く別の世界のように見せます。" },
+          { en: "For example, four tiny runners race across the pages of a dictionary as if it were a running track.",    ja: "例えば，小さな4人のランナーが，まるでトラックのように辞書のページを走ります。" },
+          { en: "Tanaka says that he feels the happiest when a new creative idea suddenly comes to his mind.",             ja: "田中は，新しい創造的なアイデアが突然浮かんだとき，一番幸せだと言っています。" },
+          { en: "Since he started sharing his work online, millions of people have enjoyed his unique view of the world.", ja: "作品をオンラインで発信し始めてから，何百万人もの人がその独特な世界観を楽しんでいます。" },
+          { en: "His art shows us that amazing things can come from the simplest everyday objects.",                       ja: "彼の芸術は，最もシンプルな日常の物から驚くべきものが生まれることを教えてくれます。" },
         ],
       },
     ],
 
+    // ------ 内容確認問題（TF問題集・定期考査よりアレンジ） ------
     comprehensionQuestions: [
-      { question: "Sam's request is \"In My Life\" by the Beatles.", type: "truefalse", answer: true },
-      { question: "Sam's request is a present for his grandpa.", type: "truefalse", answer: false },
-      { question: "\"In My Life\" reminds Sam's grandma of her grandpa.", type: "truefalse", answer: true },
-      { question: "Sam's grandpa sang \"In My Life\" to Sam's grandma as a wedding song.", type: "truefalse", answer: false },
-      { question: "\"Yesterday\" is more precious than \"In My Life\" to Sam's grandma.", type: "truefalse", answer: false },
-      { question: "The Beatles debuted about 60 years ago and are still popular today.", type: "truefalse", answer: true },
-      { question: "The Beatles were the most popular band in the world in the 1970s.", type: "truefalse", answer: false },
-      { question: "In 1964, the Beatles' songs occupied No. 1 to 5 on the US hit chart.", type: "truefalse", answer: true },
-      { question: "The DJ's favorite Beatles song always makes her sad.", type: "truefalse", answer: false },
+      // TF問題集より
+      { question: "Children are running in the photo on the left.", type: "truefalse", answer: false },
+      { question: "The tree in the photo on the left is not real.", type: "truefalse", answer: true },
+      { question: "Tanaka used broccoli as a tree.", type: "truefalse", answer: true },
+      { question: "Five runners are running in the top right photo.", type: "truefalse", answer: false },
+      { question: "In the top right photo, four runners are on a dictionary.", type: "truefalse", answer: true },
+      { question: "Tanaka Tatsuya made the miniature artworks in the photos.", type: "truefalse", answer: true },
+      { question: "Tanaka uses special objects for his miniature artworks.", type: "truefalse", answer: false },
+      { question: "Tanaka uses everyday objects for his artworks in unique ways.", type: "truefalse", answer: true },
+      { question: "Tanaka is happy when he comes up with good ideas.", type: "truefalse", answer: true },
+      { question: "Tanaka does not like his work very much.", type: "truefalse", answer: false },
+      { question: "Tanaka really enjoys his work.", type: "truefalse", answer: true },
+      // 定期考査よりアレンジ（選択式）
       {
-        question: "What is Sam's request?",
+        question: "The tree in the artwork is real.",
         type: "multiple",
-        options: ["\"Yesterday\" by the Beatles", "\"Let It Be\" by the Beatles", "\"In My Life\" by the Beatles", "\"Ob-La-Di, Ob-La-Da\" by the Beatles"],
-        answer: 2,
-      },
-      {
-        question: "Why did Sam's grandpa sing \"In My Life\" to Sam's grandma?",
-        type: "multiple",
-        options: ["Because it was his favorite song", "Because the DJ played it on the radio", "As a birthday present", "Because it is the most famous Beatles song"],
-        answer: 2,
-      },
-      {
-        question: "To Sam's grandma, which song is the most precious?",
-        type: "multiple",
-        options: ["\"Yesterday\"", "\"Let It Be\"", "\"Ob-La-Di, Ob-La-Da\"", "\"In My Life\""],
-        answer: 3,
-      },
-      {
-        question: "In 1964, the Beatles occupied No. 1 to 5 on which chart?",
-        type: "multiple",
-        options: ["The British hit chart", "The world music chart", "The US hit chart", "The Japanese hit chart"],
-        answer: 2,
-      },
-      {
-        question: "When were the Beatles the most popular band in the world?",
-        type: "multiple",
-        options: ["In the 1950s", "In the 1960s", "In the 1970s", "In the 1980s"],
+        options: ["T（正しい）", "F（間違い）"],
         answer: 1,
       },
       {
-        question: "Why does the DJ like \"Ob-La-Di, Ob-La-Da\"?",
+        question: "Tanaka uses everyday objects such as a dictionary and broccoli for his artworks.",
         type: "multiple",
-        options: ["Because it is the most famous Beatles song", "Because it always cheers her up", "Because it reminds her of someone special", "Because it was given as a birthday present"],
+        options: ["T（正しい）", "F（間違い）"],
+        answer: 0,
+      },
+      {
+        question: "What does Tanaka use for his miniature artworks?",
+        type: "multiple",
+        options: ["Special expensive materials", "Everyday objects like broccoli and a dictionary", "Only vegetables", "Tools from a craft shop"],
         answer: 1,
       },
       {
-        question: "What did the DJ guess at the end of Part 1?",
-        type: "multiple",
-        options: ["That Sam likes the Beatles very much", "That grandpa sang beautifully", "That each person has stories about their favorite songs or musicians", "That grandma is very happy"],
-        answer: 2,
+        question: "田中達也はどんなときに幸せを感じますか。本文から日本語で答えなさい。",
+        type: "text",
+        answer: "よいアイデアを思いついたとき",
+        keywords: ["アイデア", "思いつい", "idea", "comes up"],
       },
     ],
 
+    // ------ アレンジ版問題（英問英答） ------
+    rewriteQuestions: [
+      { type: "truefalse", question: "The \"tree\" in Tanaka's photo is actually broccoli.", answer: true },
+      { type: "truefalse", question: "Tanaka Tatsuya is a miniature artist from the United States.", answer: false },
+      { type: "multiple",
+        question: "What materials does Tanaka use for his artworks?",
+        options: ["Expensive art supplies from shops", "Ordinary things from daily life", "Only fresh vegetables", "Miniature toys he buys online"],
+        answer: 1 },
+      { type: "underline",
+        passage: "Four tiny runners race across <u>the pages of a dictionary</u> as if it were a running track.",
+        question: "What does the underlined part tell us?",
+        options: ["The runners are using dictionaries to study", "A dictionary is used as a running track", "The runners are very fast readers", "A dictionary is a kind of sport"],
+        answer: 1 },
+      { type: "multiple",
+        question: "When does Tanaka feel the happiest?",
+        options: ["When he sells his art for a high price", "When a new creative idea suddenly comes to his mind", "When millions of people follow him online", "When he finishes a large artwork"],
+        answer: 1 },
+      { type: "truefalse", question: "Tanaka's photos have become famous all over the world.", answer: true },
+    ],
+
+    // ------ 文法 ------
     grammar: {
       rules: [
         {
-          title: "比較級 more ... than 〜",
-          explanation: "つづりの長い（2音節以上の）形容詞・副詞を比べるとき、\n[ more + 形容詞/副詞 + than ～ ] で表します。\n\n例：precious → more precious than\n　　popular  → more popular than\n　　exciting → more exciting than\n\n【注意】1音節の語は -er を使う（tall → taller）",
+          title: "現在進行形",
+          explanation: "「（今）～している」という進行中の動作を表す。\n形：am / are / is ＋ 動詞の -ing 形\n\n【否定】am / are / is not ＋ -ing\n【疑問】Am / Are / Is ＋ 主語 ＋ -ing ～?",
           examples: [
-            { en: "This song is more precious than \"Yesterday.\"", ja: "この歌は「イエスタデイ」より大切です。" },
-            { en: "English is more interesting than math for me.", ja: "私にとって英語は数学より面白いです。" },
-            { en: "Summer is more exciting than winter.", ja: "夏は冬よりわくわくします。" },
+            { en: "Children are climbing up a tree with a ladder.", ja: "子どもたちがはしごを使って木登りをしています。" },
+            { en: "Are they running on a track?", ja: "彼らはトラックを走っているのでしょうか？" },
+            { en: "Mary is playing tennis now.", ja: "メアリーは今テニスをしています。" },
           ],
         },
         {
-          title: "最上級 the most ... in / of 〜",
-          explanation: "つづりの長い（2音節以上の）形容詞・副詞で「いちばん…」を表すとき、\n[ the most + 形容詞/副詞 + in / of ～ ] を使います。\n\n● 場所・範囲（グループ）→ in\n　They were the most popular band in the world.\n\n● 複数のもの（〇つの中で）→ of\n　Song A is the most beautiful of the three.\n\n【注意】1音節の語は the -est を使う（tall → the tallest）",
+          title: "過去進行形",
+          explanation: "「（そのとき）～していた」という過去の進行中の動作を表す。\n形：was / were ＋ 動詞の -ing 形\n\n【否定】was / were not ＋ -ing\n【疑問】Was / Were ＋ 主語 ＋ -ing ～?",
           examples: [
-            { en: "They were the most popular band in the world in the 1960s.", ja: "彼らは1960年代に世界でいちばん人気のあるバンドでした。" },
-            { en: "\"In My Life\" is the most precious song of all to her.", ja: "「イン・マイ・ライフ」は彼女にとって全ての曲の中で最も大切です。" },
-            { en: "What is the most interesting subject in your school?", ja: "あなたの学校で最も面白い科目は何ですか？" },
+            { en: "Mary was playing tennis at 3 p.m. yesterday.", ja: "メアリーはきのうの午後3時にテニスをしていました。" },
+            { en: "Takuya was sleeping when I called him.", ja: "私が電話したとき，タクヤは眠っていました。" },
+            { en: "What were you doing around eight last night?", ja: "昨夜８時ごろ，何をしていましたか。" },
           ],
         },
       ],
 
+      // 文法演習問題①②③④・提出用レポート10よりアレンジ
       fillBlanks: [
-        { instruction: "（　）に適切な語を入れなさい。", sentence: "This song is ___ precious than \"Yesterday.\"", answer: "more", hint: "「～より大切」→ more + 形容詞 + than" },
-        { instruction: "（　）に適切な語を入れなさい。", sentence: "They were the most popular band ___ the world.", answer: "in", hint: "「世界の中で」→ 場所・範囲には in" },
-        { instruction: "（　）に適切な語を入れなさい。", sentence: "I think Song A is the most beautiful ___ the three.", answer: "of", hint: "「3つの中で」→ 複数のものには of" },
-        { instruction: "（　）に適切な語を入れなさい。", sentence: "Ramen is ___ popular than udon in Japan.", answer: "more", hint: "「うどんより人気」→ more + 形容詞 + than" },
-        { instruction: "（　）に適切な語を入れなさい。", sentence: "Summer vacation is the most exciting ___ the four seasons.", answer: "of", hint: "「4つの季節の中で」→ 複数のもの of" },
-        { instruction: "（　）に適切な語を入れなさい。", sentence: "She is the ___ important person in my family.", answer: "most", hint: "「家族の中で最も大切」→ the most + 形容詞" },
-        { instruction: "（　）に適切な語を入れなさい。", sentence: "This present is ___ wonderful than that one.", answer: "more", hint: "「あれよりすばらしい」→ more + 形容詞 + than" },
-        { instruction: "（　）に適切な語を入れなさい。", sentence: "\"Ob-La-Di\" is the most cheerful ___ all Beatles songs.", answer: "of", hint: "「全ての曲の中で」→ of" },
-        { instruction: "（　）に適切な語を入れなさい。", sentence: "Math is ___ difficult than English for me.", answer: "more", hint: "「英語より難しい」→ more + 形容詞 + than" },
-        { instruction: "（　）に適切な語を入れなさい。", sentence: "Tokyo is the most exciting city ___ Japan.", answer: "in", hint: "「日本の中で」→ 場所・範囲 in" },
+        { instruction: "日本語に合うように，( )内の動詞を適切な進行形に変えなさい。", sentence: "私は今音楽を聞いています。\nI ___ to music now.  ( listen )", answer: "am listening", hint: "現在進行形：am/are/is + -ing" },
+        { instruction: "日本語に合うように，( )内の動詞を適切な進行形に変えなさい。", sentence: "そのとき，私は川沿いを走っていました。\nI ___ along the river then.  ( run )", answer: "was running", hint: "過去進行形：was/were + -ing　run → running（n を重ねる）" },
+        { instruction: "日本語に合うように，( )内の動詞を適切な進行形に変えなさい。", sentence: "少年たちはふざけあっています。\nThe boys ___ fun of each other.  ( make )", answer: "are making", hint: "主語が複数 → are + -ing" },
+        { instruction: "日本語に合うように，( )内の動詞を適切な進行形に変えなさい。", sentence: "彼女はテレビゲームをしているのですか。\nIs she ___ a video game?  ( play )", answer: "playing", hint: "Is she ___? の答えは -ing 形だけでOK" },
+        { instruction: "日本語に合うように，( )内の動詞を適切な進行形に変えなさい。", sentence: "そのとき，彼らはお気に入りのマンガについて話していました。\nThey ___ about their favorite manga at the time.  ( talk )", answer: "were talking", hint: "過去進行形：were + -ing" },
+        { instruction: "日本語に合うように，( )内の動詞を適切な進行形に変えなさい。", sentence: "私の姉は今眠っています。\nMy sister ___ now.  ( sleep )", answer: "is sleeping", hint: "主語が My sister（三人称単数）→ is + -ing" },
+        { instruction: "日本語に合うように，( )内の動詞を適切な進行形に変えなさい。", sentence: "昨日の朝，私たちは海で泳いでいました。\nWe ___ in the sea yesterday morning.  ( swim )", answer: "were swimming", hint: "swim → swimming（m を重ねる）" },
+        { instruction: "日本語に合うように，( )内の動詞を適切な進行形に変えなさい。", sentence: "ミカは今宿題をしています。\nMika ___ her homework now.  ( do )", answer: "is doing", hint: "do → doing" },
+        { instruction: "日本語に合うように，( )内の動詞を適切な進行形に変えなさい。", sentence: "そのとき，ケンとレンは電車を待っていました。\nKen and Ren ___ for the train then.  ( wait )", answer: "were waiting", hint: "主語が複数 → were + -ing" },
+        { instruction: "日本語に合うように，( )内の動詞を適切な進行形に変えなさい。", sentence: "そのとき，私は夕食を作っていました。\nI ___ dinner at the time.  ( cook )", answer: "was cooking", hint: "過去進行形：was + -ing" },
+        { instruction: "日本語に合うように，( )内の動詞を適切な進行形に変えなさい。", sentence: "私は今電車を待っています。\nI ___ for the train now.  ( wait )", answer: "am waiting", hint: "現在進行形：am + -ing" },
+        { instruction: "( )内から適切なものを選びなさい。", sentence: "私が電話をかけたとき，タクヤは眠っていた。\nTakuya ___ when I called him.  ( sleeps / was sleeping )", answer: "was sleeping", hint: "「そのとき眠っていた」→ 過去進行形 was sleeping" },
       ],
 
+      // 文法演習問題⑤よりアレンジ
       rearrange: [
-        { instruction: "語句を並べ替えて正しい英文を作りなさい。", words: ["This", "song", "is", "more", "precious", "than", "Yesterday"], answer: "this song is more precious than yesterday", ja: "この歌は「イエスタデイ」より大切です。" },
-        { instruction: "語句を並べ替えて正しい英文を作りなさい。", words: ["They", "were", "the", "most", "popular", "band", "in", "the", "world"], answer: "they were the most popular band in the world", ja: "彼らは世界でいちばん人気のあるバンドでした。" },
-        { instruction: "語句を並べ替えて正しい英文を作りなさい。", words: ["English", "is", "more", "interesting", "than", "math", "for", "me"], answer: "english is more interesting than math for me", ja: "私にとって英語は数学より面白いです。" },
-        { instruction: "語句を並べ替えて正しい英文を作りなさい。", words: ["Song", "A", "is", "the", "most", "exciting", "of", "the", "three"], answer: "song a is the most exciting of the three", ja: "曲Aは3つの中で最も興奮します。" },
-        { instruction: "語句を並べ替えて正しい英文を作りなさい。", words: ["Soccer", "is", "more", "popular", "than", "tennis", "in", "Japan"], answer: "soccer is more popular than tennis in japan", ja: "日本ではサッカーはテニスより人気があります。" },
-        { instruction: "語句を並べ替えて正しい英文を作りなさい。", words: ["This", "song", "always", "cheers", "me", "up"], answer: "this song always cheers me up", ja: "この歌はいつも私を元気づけてくれます。" },
-        { instruction: "語句を並べ替えて正しい英文を作りなさい。", words: ["She", "is", "the", "most", "important", "person", "in", "my", "family"], answer: "she is the most important person in my family", ja: "彼女は私の家族の中で最も大切な人です。" },
+        { instruction: "語句を並べ替えて正しい英文を作りなさい。", words: ["Tom", "is", "washing", "the", "dishes", "now"], answer: "tom is washing the dishes now", ja: "トムは今，皿を洗っています。" },
+        { instruction: "語句を並べ替えて正しい英文を作りなさい。", words: ["Mark", "is", "singing", "in", "the", "bathroom"], answer: "mark is singing in the bathroom", ja: "マークは今，お風呂で歌を歌っています。" },
+        { instruction: "語句を並べ替えて正しい英文を作りなさい。", words: ["Meg", "was", "using", "the", "Internet", "at", "that", "time"], answer: "meg was using the internet at that time", ja: "メグはそのときインターネットを使っていました。" },
+        { instruction: "語句を並べ替えて正しい英文を作りなさい。", words: ["Were", "you", "driving", "a", "car", "then"], answer: "were you driving a car then", ja: "あなたはそのとき車を運転していたのですか。" },
+        { instruction: "語句を並べ替えて正しい英文を作りなさい。", words: ["Kayla", "is", "practicing", "judo", "now"], answer: "kayla is practicing judo now", ja: "カイラは今，柔道を練習しています。" },
+        { instruction: "語句を並べ替えて正しい英文を作りなさい。", words: ["were", "you", "doing", "What", "around", "eight", "last", "night"], answer: "what were you doing around eight last night", ja: "昨夜８時ごろ，何をしていましたか。" },
       ],
 
+      // 提出用レポート11・定期考査7よりアレンジ
       composition: [
-        { prompt: "「英語は数学よりも面白いです」という英文を書きなさい。", hint: "more interesting than / English / math", modelAnswer: "English is more interesting than math." },
-        { prompt: "「彼女は私の家族の中で最も大切な人です」という英文を書きなさい。", hint: "the most important / in my family", modelAnswer: "She is the most important person in my family." },
-        { prompt: "「私にとって、この曲は他のどの曲よりも大切です」という英文を書きなさい。", hint: "more precious / than any other song / to me", modelAnswer: "This song is more precious to me than any other song." },
-        { prompt: "「3曲の中で、「レット・イット・ビー」が最も有名だと思います」という英文を書きなさい。", hint: "I think / the most famous / of the three", modelAnswer: "I think \"Let It Be\" is the most famous of the three." },
+        { prompt: "「私は今夕食を作っているところです」という内容の英文を書きなさい。", hint: "make → making / am + -ing", modelAnswer: "I am making dinner now." },
+        { prompt: "「そのとき，私たちは電話で話していました」という内容の英文を書きなさい。", hint: "talk → talking / were + -ing / on the phone / at that time", modelAnswer: "We were talking on the phone at that time." },
+        { prompt: "「私はあの映画を見ているとき，幸せを感じます」という内容の英文を書きなさい。", hint: "I feel happy when I ___ / watch → watching / am watching", modelAnswer: "I feel happy when I am watching that movie." },
+        { prompt: "「あなたはこの前の日曜日の正午ごろ，何をしていましたか」という内容の英文を書きなさい。", hint: "What / were / doing / around noon / last Sunday", modelAnswer: "What were you doing around noon last Sunday?" },
+      ],
+    },
+  },
+
+  // ================================================================
+  // LESSON 03  Onigiri Goes Overseas
+  // ================================================================
+  {
+    id: 3,
+    title: "Lesson 3",
+    subtitle: "Onigiri Goes Overseas",
+
+    // ------ 単語 ------
+    vocabulary: [
+      { en: "popular",       ja: "人気のある",                  example: "Onigiri is ___ abroad.",                                    exampleAnswer: "popular",       exampleJa: "おにぎりは海外で人気があります。" },
+      { en: "abroad",        ja: "外国で，海外で",             example: "Onigiri, a rice ball, is popular ___.",                     exampleAnswer: "abroad",        exampleJa: "おにぎり（ライスボール）は海外で人気があります。" },
+      { en: "even",          ja: "～でさえ",                  example: "You can find onigiri shops in the US, France, and ___ Israel!", exampleAnswer: "even",        exampleJa: "アメリカ、フランス、さらにはイスラエルでもおにぎり店を見つけられます！" },
+      { en: "appeal",        ja: "興味を引く，人気を得る",      example: "Why does onigiri ___ to people overseas?",                  exampleAnswer: "appeal",        exampleJa: "なぜおにぎりは海外の人々に人気があるのですか？" },
+      { en: "overseas",      ja: "海外で，外国の",             example: "Why does onigiri appeal to people ___?",                    exampleAnswer: "overseas",      exampleJa: "なぜおにぎりは海外の人々に人気があるのですか？" },
+      { en: "handy",         ja: "手軽な",                   example: "It is a ___ and healthy fast food.",                         exampleAnswer: "handy",         exampleJa: "それは手軽で健康的なファストフードです。" },
+      { en: "healthy",       ja: "健康によい",                example: "It is a handy and ___ fast food.",                           exampleAnswer: "healthy",       exampleJa: "それは手軽で健康的なファストフードです。" },
+      { en: "addition",      ja: "追加；in addition＝さらに",  example: "In ___, they can enjoy a variety of fillings.",              exampleAnswer: "addition",      exampleJa: "さらに、さまざまな種類の具を楽しむことができます。" },
+      { en: "variety",       ja: "種類；a variety of＝さまざまな", example: "They can enjoy a ___ of fillings.",                    exampleAnswer: "variety",       exampleJa: "さまざまな種類の具を楽しむことができます。" },
+      { en: "filling",       ja: "中身，具",                  example: "They can enjoy a variety of ___.",                           exampleAnswer: "fillings",      exampleJa: "さまざまな種類の具を楽しむことができます。" },
+      { en: "local",         ja: "地元の",                   example: "They may put their ___ food in it.",                         exampleAnswer: "local",         exampleJa: "地元の食べ物を中に入れることもあります。" },
+      { en: "favorite",      ja: "お気に入りの",              example: "Some people see onigiri in their ___ anime.",                exampleAnswer: "favorite",      exampleJa: "お気に入りのアニメでおにぎりを見る人もいます。" },
+      { en: "international", ja: "国際的な",                 example: "Today, onigiri is an ___ food.",                             exampleAnswer: "international", exampleJa: "今日、おにぎりは国際的な食べ物です。" },
+    ],
+
+    // ------ 本文 ------
+    texts: [
+      {
+        id: "original",
+        label: "本文",
+        isRewrite: false,
+        sentences: [
+          { en: "Onigiri, a rice ball, is popular abroad.",                ja: "おにぎり，つまりライスボールは海外で人気です。" },
+          { en: "You can find onigiri shops in the US, France, Singapore, and even Israel!", ja: "アメリカ，フランス，シンガポール，そしてイスラエルでもおにぎりの店が見つかります！" },
+          { en: "Why does onigiri appeal to people overseas?",             ja: "なぜおにぎりは海外の人々の興味を引くのでしょうか。" },
+          { en: "It is a handy and healthy fast food.",                    ja: "それは手軽で健康によいファストフードです。" },
+          { en: "In addition, they can enjoy a variety of fillings.",     ja: "さらに，さまざまな具を楽しめます。" },
+          { en: "They may put their local food in it.",                   ja: "彼らはそれに現地の食材を入れるかもしれません。" },
+          { en: "Also, some people see onigiri in their favorite Japanese anime, and they become interested in it.", ja: "また，好きな日本のアニメでおにぎりを見て興味をもつようになる人もいます。" },
+          { en: "Today, onigiri is an international food.",               ja: "今日，おにぎりは国際的な食べ物です。" },
+        ],
+      },
+      {
+        id: "rewrite",
+        label: "アレンジ版",
+        isRewrite: true,
+        sentences: [
+          { en: "Imagine walking into a small shop in Paris and finding onigiri on the shelf.",                             ja: "パリの小さなお店に入って，棚においてあるおにぎりを見つける場面を想像してみてください。" },
+          { en: "This is not a dream — onigiri shops are now open in cities around the world!",                            ja: "これは夢ではありません。おにぎりの店は今や世界中の都市にオープンしています！" },
+          { en: "From New York to Tel Aviv, people are falling in love with this simple Japanese food.",                   ja: "ニューヨークからテルアビブまで，人々はこのシンプルな日本食に夢中になっています。" },
+          { en: "First, onigiri is easy to carry and eat anywhere, making it the perfect fast food.",                      ja: "まず，おにぎりはどこにでも持ち運んで食べられるので，最高のファストフードです。" },
+          { en: "Second, unlike many fast foods, onigiri uses simple natural ingredients and is good for your body.",      ja: "次に，多くのファストフードとは異なり，おにぎりはシンプルな天然食材を使っており，体に良いです。" },
+          { en: "Another great thing is that people can fill their onigiri with local flavors from their own culture.",    ja: "さらに良いことに，自分の文化の地元の味をおにぎりの具にすることができます。" },
+          { en: "In some countries, shops sell onigiri with unique fillings that you cannot find in Japan.",               ja: "国によっては，日本では見つけられない独特な具を使ったおにぎりを売る店もあります。" },
+          { en: "Japanese anime has also played a big role — many fans want to try the food their favorite characters eat.", ja: "日本のアニメも大きな役割を果たしています。多くのファンが，好きなキャラクターが食べるものを試したいと思うのです。" },
+          { en: "Thanks to all these reasons, onigiri has grown from a simple rice ball into a food that belongs to the whole world.", ja: "これらの理由から，おにぎりはシンプルなおにぎりから，世界全体のものへと成長しました。" },
+        ],
+      },
+    ],
+
+    // ------ 内容確認問題（TF問題集・定期考査・単語文法テストよりアレンジ） ------
+    comprehensionQuestions: [
+      // TF問題集より
+      { question: "\"Rice ball\" is the English word for onigiri.", type: "truefalse", answer: true },
+      { question: "Onigiri is popular only in Japan.", type: "truefalse", answer: false },
+      { question: "There are onigiri shops around the world.", type: "truefalse", answer: true },
+      { question: "You can find onigiri shops in the United States of America.", type: "truefalse", answer: true },
+      { question: "Israel has no onigiri shops.", type: "truefalse", answer: false },
+      { question: "Onigiri is a handy food.", type: "truefalse", answer: true },
+      { question: "Onigiri is a kind of fast food, so it is not good for your health.", type: "truefalse", answer: false },
+      { question: "There is a variety of onigiri fillings.", type: "truefalse", answer: true },
+      { question: "People overseas never put their local food in onigiri.", type: "truefalse", answer: false },
+      { question: "Some people become interested in onigiri after they see it in their favorite Japanese anime.", type: "truefalse", answer: true },
+      { question: "Onigiri may become an international food in the future.", type: "truefalse", answer: false },
+      // 定期考査よりアレンジ（選択式）
+      {
+        question: "Why does onigiri appeal to people overseas? (Choose TWO reasons)",
+        type: "multiple",
+        options: [
+          "It is expensive and rare.",
+          "It is a handy and healthy fast food.",
+          "People can enjoy a variety of fillings.",
+          "It tastes exactly like Japanese food.",
+        ],
+        answer: 1,
+      },
+      {
+        question: "People can enjoy many kinds of fillings for onigiri.",
+        type: "multiple",
+        options: ["T（正しい）", "F（間違い）"],
+        answer: 0,
+      },
+      {
+        question: "おにぎりの店が見られる国を本文から英語で４つ答えなさい。",
+        type: "text",
+        answer: "the US, France, Singapore, Israel",
+        keywords: ["us", "france", "singapore", "israel"],
+      },
+      {
+        question: "海外でおにぎりに人気の具として，本文から読み取れることを日本語で答えなさい。",
+        type: "text",
+        answer: "現地の食材（その国の食材）",
+        keywords: ["現地", "地元", "local", "その国"],
+      },
+    ],
+
+    // ------ アレンジ版問題（英問英答） ------
+    rewriteQuestions: [
+      { type: "truefalse", question: "Onigiri shops are now open in cities around the world.", answer: true },
+      { type: "multiple",
+        question: "According to the passage, why is onigiri a good fast food?",
+        options: ["It is very cheap and filling.", "It is easy to carry, eat anywhere, and good for your body.", "It is cooked fresh in every shop.", "It has many Japanese traditional flavors."],
+        answer: 1 },
+      { type: "underline",
+        passage: "People can fill their onigiri with <u>local flavors from their own culture</u>.",
+        question: "What does the underlined part mean?",
+        options: ["Everyone eats the same Japanese filling", "People can use food ingredients from their home country", "Local flavors are always spicy", "Only people from France use local fillings"],
+        answer: 1 },
+      { type: "truefalse", question: "In some countries, shops sell onigiri with fillings that you cannot find in Japan.", answer: true },
+      { type: "multiple",
+        question: "What role has Japanese anime played in onigiri's popularity?",
+        options: ["Anime characters sell onigiri in shops.", "Many fans want to try food their favorite characters eat.", "Anime teaches people how to make onigiri.", "Anime shops give free onigiri to customers."],
+        answer: 1 },
+      { type: "truefalse", question: "Onigiri is still only popular in Asian countries.", answer: false },
+    ],
+
+    // ------ 文法 ------
+    grammar: {
+      rules: [
+        {
+          title: "助動詞 can — できる / できない",
+          explanation: "can「～できる」　cannot[can't]「～できない」\n形：can ＋ 動詞の原形\n\n※ 助動詞のあとの動詞は常に原形（-s・-ed などつかない）",
+          examples: [
+            { en: "You can find onigiri shops in the US.", ja: "アメリカでおにぎりの店を見つけることができます。" },
+            { en: "Shun can speak English.", ja: "シュンは英語を話すことができます。" },
+            { en: "I cannot draw pictures well.", ja: "私はじょうずに絵が描けません。" },
+          ],
+        },
+        {
+          title: "助動詞 may — かもしれない",
+          explanation: "may「～するかもしれない」\nmay not「～しないかもしれない」\n形：may ＋ 動詞の原形",
+          examples: [
+            { en: "They may put their local food in it.", ja: "彼らはそれに現地の食材を入れるかもしれません。" },
+            { en: "Rena may be at school.", ja: "レナは学校にいるかもしれない。" },
+            { en: "It may snow tonight.", ja: "今夜，雪が降るかもしれない。" },
+          ],
+        },
+        {
+          title: "助動詞 must — しなくてはいけない / してはいけない",
+          explanation: "must「～しなくてはいけない」\nmust not[mustn't]「～してはいけない」（禁止）\n形：must ＋ 動詞の原形",
+          examples: [
+            { en: "You must be quiet in the library.", ja: "図書館では静かにしなくてはいけません。" },
+            { en: "You must not play ball here.", ja: "ここでボール遊びは禁止です。" },
+            { en: "Yumi must stay home today.", ja: "ユミは今日家にいなければなりません。" },
+          ],
+        },
+      ],
+
+      // 文法演習問題③・提出用レポート10・単語文法テストAよりアレンジ
+      fillBlanks: [
+        { instruction: "( )に can, may, must のいずれかを入れなさい。", sentence: "私は今日，担任の先生の手伝いをしなければなりません。\nI ___ help my homeroom teacher today.", answer: "must", hint: "「～しなければならない」→ must" },
+        { instruction: "( )に can, may, must のいずれかを入れなさい。", sentence: "スティーブはじょうずにギターを弾くことができます。\nSteve ___ play the guitar well.", answer: "can", hint: "「～できる」→ can" },
+        { instruction: "( )に can, can't, may, must, mustn't のいずれかを入れなさい。", sentence: "今，おしゃべりをしてはいけません。\nYou ___ talk now.", answer: "mustn't", hint: "「～してはいけない」→ must not / mustn't" },
+        { instruction: "( )に can, can't, may, must のいずれかを入れなさい。", sentence: "今晩は寒いかもしれません。\nIt ___ be cold this evening.", answer: "may", hint: "「～かもしれない」→ may" },
+        { instruction: "( )に can, can't, may, must, mustn't のいずれかを入れなさい。", sentence: "母は車を運転することができません。\nMy mother ___ drive a car.", answer: "can't", hint: "「～できない」→ cannot / can't" },
+        { instruction: "( )に適切な語を入れなさい。（2語）", sentence: "ここで写真を撮ってはいけません。\nYou ___ ___ take pictures here.", answer: "must not", hint: "「～してはいけない」→ must not（2語）" },
+        { instruction: "( )に適切な語を入れなさい。", sentence: "明日は雪が降るかもしれません。\nIt ___ snow tomorrow.", answer: "may", hint: "「～かもしれない」→ may" },
+        { instruction: "( )に can, can't, may, must のいずれかを入れなさい。", sentence: "私は早く帰宅しなくてはいけません。\nI ___ go home early.", answer: "must", hint: "「～しなければならない」→ must" },
+        { instruction: "( )に can, can't, may, must のいずれかを入れなさい。", sentence: "ビルは納豆が好きではないかもしれない。\nBill ___ not like natto.", answer: "may", hint: "「～しないかもしれない」→ may not" },
+        { instruction: "( )に can, can't, may, must のいずれかを入れなさい。", sentence: "ジョンは和食をつくることができる。\nJohn ___ cook Japanese food.", answer: "can", hint: "「～できる」→ can" },
+        { instruction: "( )に can, can't, may, must のいずれかを入れなさい。", sentence: "私たちは学校に遅れるかもしれない。\nWe ___ be late for school.", answer: "may", hint: "「～かもしれない」→ may" },
+        { instruction: "( )に can, can't, may, must のいずれかを入れなさい。", sentence: "図書館では静かにしていなくてはなりません。\nYou ___ be quiet in the library.", answer: "must", hint: "「～しなければならない」→ must" },
+      ],
+
+      // 文法演習問題②・定期考査よりアレンジ
+      rearrange: [
+        { instruction: "語句を並べ替えて正しい英文を作りなさい。", words: ["Ken", "can", "run", "fast"], answer: "ken can run fast", ja: "ケンは速く走ることができます。" },
+        { instruction: "語句を並べ替えて正しい英文を作りなさい。", words: ["It", "may", "snow", "in", "the", "evening"], answer: "it may snow in the evening", ja: "夕方に雪が降るかもしれません。" },
+        { instruction: "語句を並べ替えて正しい英文を作りなさい。", words: ["You", "must", "finish", "your", "homework", "by", "tomorrow"], answer: "you must finish your homework by tomorrow", ja: "あなたは明日までに宿題を終えなくてはなりません。" },
+        { instruction: "語句を並べ替えて正しい英文を作りなさい。", words: ["He", "can", "speak", "Japanese", "well"], answer: "he can speak japanese well", ja: "彼はじょうずに日本語を話せます。" },
+        { instruction: "語句を並べ替えて正しい英文を作りなさい。", words: ["You", "must", "not", "play", "here"], answer: "you must not play here", ja: "ここで遊んではいけません。" },
+        { instruction: "語句を並べ替えて正しい英文を作りなさい。", words: ["She", "may", "have", "a", "good", "idea"], answer: "she may have a good idea", ja: "彼女はよい考えがあるかもしれません。" },
+        { instruction: "語句を並べ替えて正しい英文を作りなさい。", words: ["This", "news", "may", "not", "be", "true"], answer: "this news may not be true", ja: "このニュースは本当ではないかもしれません。" },
+      ],
+
+      // 文法演習問題⑤・定期考査よりアレンジ
+      composition: [
+        { prompt: "「私はじょうずに泳ぐことができる」という内容の英文を書きなさい。", hint: "can ＋ 動詞の原形 / swim well", modelAnswer: "I can swim well." },
+        { prompt: "「明日は雪が降るかもしれない」という内容の英文を書きなさい。", hint: "may ＋ 動詞の原形 / snow / tomorrow", modelAnswer: "It may snow tomorrow." },
+        { prompt: "「図書館では静かにしていなくてはなりません」という内容の英文を書きなさい。", hint: "must ＋ 動詞の原形 / be quiet / in the library", modelAnswer: "You must be quiet in the library." },
+        { prompt: "「彼は病気かもしれません」という内容の英文を書きなさい。", hint: "may + be / sick", modelAnswer: "He may be sick." },
+        { prompt: "「私の弟は自転車に乗ることができません」という内容の英文を書きなさい。", hint: "cannot[can't] ＋ 動詞の原形 / ride a bike", modelAnswer: "My brother cannot ride a bike." },
       ],
     },
   },
@@ -336,9 +588,9 @@ const LESSONS = [
 // ================================================================
 const TARGET_UNITS = [
 
-  // ── Unit 1（単語 1〜40）──
+  // ── Unit 1（Drill 1 / 単語 1〜20）──
   {
-    id: 1, title: "Unit 1", subtitle: "単語 1〜40",
+    id: 1, title: "Unit 1", subtitle: "Drill 1（単語 1〜20）",
     words: [
       { id:  1, en: "change",  ja: "変える",        pos: "動" },
       { id:  2, en: "learn",   ja: "学ぶ",          pos: "動" },
@@ -360,6 +612,13 @@ const TARGET_UNITS = [
       { id: 18, en: "stay",    ja: "滞在する",       pos: "動" },
       { id: 19, en: "move",    ja: "移動させる",     pos: "動" },
       { id: 20, en: "plan",    ja: "計画する",       pos: "動" },
+    ],
+  },
+
+  // ── Unit 2（Drill 2 / 単語 21〜40）──
+  {
+    id: 2, title: "Unit 2", subtitle: "Drill 2（単語 21〜40）",
+    words: [
       { id: 21, en: "write",   ja: "書く",           pos: "動" },
       { id: 22, en: "listen",  ja: "聞く",           pos: "動" },
       { id: 23, en: "happen",  ja: "起こる",         pos: "動" },
@@ -383,9 +642,9 @@ const TARGET_UNITS = [
     ],
   },
 
-  // ── Unit 2（単語 41〜80）──
+  // ── Unit 3（Drill 3 / 単語 41〜60）──
   {
-    id: 2, title: "Unit 2", subtitle: "単語 41〜80",
+    id: 3, title: "Unit 3", subtitle: "Drill 3（単語 41〜60）",
     words: [
       { id: 41, en: "question",  ja: "質問",              pos: "名" },
       { id: 42, en: "color",     ja: "色",                pos: "名" },
@@ -407,6 +666,13 @@ const TARGET_UNITS = [
       { id: 58, en: "computer",  ja: "コンピューター",     pos: "名" },
       { id: 59, en: "plant",     ja: "植物",              pos: "名" },
       { id: 60, en: "art",       ja: "美術",              pos: "名" },
+    ],
+  },
+
+  // ── Unit 4（Drill 4 / 単語 61〜80）──
+  {
+    id: 4, title: "Unit 4", subtitle: "Drill 4（単語 61〜80）",
+    words: [
       { id: 61, en: "chance",    ja: "機会・チャンス",     pos: "名" },
       { id: 62, en: "history",   ja: "歴史",              pos: "名" },
       { id: 63, en: "festival",  ja: "祭り・文化祭",       pos: "名" },
@@ -430,9 +696,9 @@ const TARGET_UNITS = [
     ],
   },
 
-  // ── Unit 3（単語 81〜120）──
+  // ── Unit 5（Drill 5 / 単語 81〜100）──
   {
-    id: 3, title: "Unit 3", subtitle: "単語 81〜120",
+    id: 5, title: "Unit 5", subtitle: "Drill 5（単語 81〜100）",
     words: [
       { id:  81, en: "special",   ja: "特別な",           pos: "形" },
       { id:  82, en: "famous",    ja: "有名な",           pos: "形" },
@@ -454,120 +720,6 @@ const TARGET_UNITS = [
       { id:  98, en: "introduce", ja: "紹介する",         pos: "動" },
       { id:  99, en: "join",      ja: "参加する",         pos: "動" },
       { id: 100, en: "clean",     ja: "掃除する",         pos: "動" },
-      { id: 101, en: "answer",    ja: "答える",           pos: "動" },
-      { id: 102, en: "throw",     ja: "投げる",           pos: "動" },
-      { id: 103, en: "invite",    ja: "招待する",         pos: "動" },
-      { id: 104, en: "pick",      ja: "摘む・選ぶ",       pos: "動" },
-      { id: 105, en: "die",       ja: "死ぬ",             pos: "動" },
-      { id: 106, en: "return",    ja: "戻る",             pos: "動" },
-      { id: 107, en: "fly",       ja: "飛ぶ",             pos: "動" },
-      { id: 108, en: "cut",       ja: "切る",             pos: "動" },
-      { id: 109, en: "hit",       ja: "打つ",             pos: "動" },
-      { id: 110, en: "excuse",    ja: "許す",             pos: "動" },
-      { id: 111, en: "wash",      ja: "洗う",             pos: "動" },
-      { id: 112, en: "cry",       ja: "叫ぶ・泣く",       pos: "動" },
-      { id: 113, en: "borrow",    ja: "借りる",           pos: "動" },
-      { id: 114, en: "kill",      ja: "殺す",             pos: "動" },
-      { id: 115, en: "push",      ja: "押す",             pos: "動" },
-      { id: 116, en: "climb",     ja: "登る",             pos: "動" },
-      { id: 117, en: "laugh",     ja: "笑う",             pos: "動" },
-      { id: 118, en: "smile",     ja: "微笑む",           pos: "動" },
-      { id: 119, en: "hurry",     ja: "急ぐ",             pos: "動" },
-      { id: 120, en: "cheer",     ja: "元気づける",       pos: "動" },
-    ],
-  },
-
-  // ── Unit 4（単語 121〜160）──
-  {
-    id: 4, title: "Unit 4", subtitle: "単語 121〜160",
-    words: [
-      { id: 121, en: "volunteer", ja: "ボランティア",      pos: "名" },
-      { id: 122, en: "side",      ja: "側・方向",          pos: "名" },
-      { id: 123, en: "front",     ja: "前・正面",          pos: "名" },
-      { id: 124, en: "concert",   ja: "コンサート",        pos: "名" },
-      { id: 125, en: "fire",      ja: "火",                pos: "名" },
-      { id: 126, en: "village",   ja: "村",                pos: "名" },
-      { id: 127, en: "lesson",    ja: "レッスン・授業",     pos: "名" },
-      { id: 128, en: "light",     ja: "光・信号",          pos: "名" },
-      { id: 129, en: "Internet",  ja: "インターネット",     pos: "名" },
-      { id: 130, en: "weather",   ja: "天気",              pos: "名" },
-      { id: 131, en: "voice",     ja: "声",                pos: "名" },
-      { id: 132, en: "piece",     ja: "一切れ・一枚",       pos: "名" },
-      { id: 133, en: "goal",      ja: "目標",              pos: "名" },
-      { id: 134, en: "speech",    ja: "スピーチ",          pos: "名" },
-      { id: 135, en: "fan",       ja: "ファン",            pos: "名" },
-      { id: 136, en: "dream",     ja: "夢",                pos: "名" },
-      { id: 137, en: "mistake",   ja: "間違い",            pos: "名" },
-      { id: 138, en: "meter",     ja: "メートル",          pos: "名" },
-      { id: 139, en: "land",      ja: "土地",              pos: "名" },
-      { id: 140, en: "hundred",   ja: "百",                pos: "名" },
-      { id: 141, en: "thousand",  ja: "千",                pos: "名" },
-      { id: 142, en: "million",   ja: "百万",              pos: "名" },
-      { id: 143, en: "medicine",  ja: "薬",                pos: "名" },
-      { id: 144, en: "uniform",   ja: "制服",              pos: "名" },
-      { id: 145, en: "heat",      ja: "暑さ・熱",          pos: "名" },
-      { id: 146, en: "evening",   ja: "夕方",              pos: "名" },
-      { id: 147, en: "noon",      ja: "正午",              pos: "名" },
-      { id: 148, en: "holiday",   ja: "祝日・休日",         pos: "名" },
-      { id: 149, en: "course",    ja: "講座・コース",       pos: "名" },
-      { id: 150, en: "rule",      ja: "ルール・規則",       pos: "名" },
-      { id: 151, en: "forest",    ja: "森・森林",           pos: "名" },
-      { id: 152, en: "farm",      ja: "農場",              pos: "名" },
-      { id: 153, en: "treasure",  ja: "宝物",              pos: "名" },
-      { id: 154, en: "hole",      ja: "穴",                pos: "名" },
-      { id: 155, en: "cloud",     ja: "雲",                pos: "名" },
-      { id: 156, en: "phone",     ja: "電話",              pos: "名" },
-      { id: 157, en: "sorry",     ja: "申し訳ない",         pos: "形" },
-      { id: 158, en: "careful",   ja: "注意深い",           pos: "形" },
-      { id: 159, en: "wonderful", ja: "すばらしい",         pos: "形" },
-      { id: 160, en: "heavy",     ja: "重い",              pos: "形" },
-    ],
-  },
-
-  // ── Unit 5（単語 161〜200）──
-  {
-    id: 5, title: "Unit 5", subtitle: "単語 161〜200",
-    words: [
-      { id: 161, en: "sick",      ja: "病気の",             pos: "形" },
-      { id: 162, en: "dear",      ja: "親愛なる",           pos: "形" },
-      { id: 163, en: "glad",      ja: "うれしい",           pos: "形" },
-      { id: 164, en: "dark",      ja: "暗い",               pos: "形" },
-      { id: 165, en: "sad",       ja: "悲しい",             pos: "形" },
-      { id: 166, en: "cute",      ja: "かわいい",           pos: "形" },
-      { id: 167, en: "free",      ja: "自由な・無料の",      pos: "形" },
-      { id: 168, en: "foreign",   ja: "外国の",             pos: "形" },
-      { id: 169, en: "low",       ja: "低い",               pos: "形" },
-      { id: 170, en: "safe",      ja: "安全な",             pos: "形" },
-      { id: 171, en: "angry",     ja: "怒っている",          pos: "形" },
-      { id: 172, en: "lucky",     ja: "運のよい",           pos: "形" },
-      { id: 173, en: "bright",    ja: "明るい",             pos: "形" },
-      { id: 174, en: "soft",      ja: "柔らかい",           pos: "形" },
-      { id: 175, en: "loud",      ja: "大声の",             pos: "形" },
-      { id: 176, en: "even",      ja: "〜さえも",           pos: "副" },
-      { id: 177, en: "back",      ja: "戻って・後ろへ",      pos: "副" },
-      { id: 178, en: "still",     ja: "まだ",               pos: "副" },
-      { id: 179, en: "early",     ja: "早く",               pos: "副" },
-      { id: 180, en: "soon",      ja: "まもなく",           pos: "副" },
-      { id: 181, en: "away",      ja: "遠くへ・離れて",      pos: "副" },
-      { id: 182, en: "almost",    ja: "ほとんど",           pos: "副" },
-      { id: 183, en: "together",  ja: "一緒に",             pos: "副" },
-      { id: 184, en: "maybe",     ja: "もしかすると",        pos: "副" },
-      { id: 185, en: "once",      ja: "かつて・1度",         pos: "副" },
-      { id: 186, en: "else",      ja: "ほかに",             pos: "副" },
-      { id: 187, en: "ago",       ja: "〜前に",             pos: "副" },
-      { id: 188, en: "straight",  ja: "まっすぐ",           pos: "副" },
-      { id: 189, en: "slowly",    ja: "ゆっくりと",          pos: "副" },
-      { id: 190, en: "suddenly",  ja: "突然",               pos: "副" },
-      { id: 191, en: "until",     ja: "〜まで",             pos: "接" },
-      { id: 192, en: "since",     ja: "〜から・〜以来",       pos: "接" },
-      { id: 193, en: "around",    ja: "〜の周りに",          pos: "前" },
-      { id: 194, en: "over",      ja: "〜を越えて",          pos: "前" },
-      { id: 195, en: "without",   ja: "〜なしに",           pos: "前" },
-      { id: 196, en: "through",   ja: "〜を通って",          pos: "前" },
-      { id: 197, en: "between",   ja: "〜の間に",           pos: "前" },
-      { id: 198, en: "during",    ja: "〜の間に",           pos: "前" },
-      { id: 199, en: "behind",    ja: "〜の後ろに",          pos: "前" },
-      { id: 200, en: "along",     ja: "〜に沿って",          pos: "前" },
     ],
   },
 ];

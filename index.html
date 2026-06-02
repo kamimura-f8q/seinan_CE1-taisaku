@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>All Aboard 英語復習ツール</title>
+  <title>英語復習ツール</title>
   <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -15,9 +15,9 @@
 <div id="screen-login" class="screen active">
   <div class="login-wrap">
     <div class="login-card">
-      <div class="login-logo">✈️</div>
+      <div class="login-logo">📖</div>
       <h1 class="login-title">英語復習ツール</h1>
-      <p class="login-sub">All Aboard! English Communication II</p>
+      <p class="login-sub">Revised COMET English Communication I</p>
 
       <div class="login-form">
         <label class="login-label">クラス</label>
@@ -51,7 +51,7 @@
 <div id="screen-material-select" class="screen">
   <header class="top-header">
     <div class="top-header-inner">
-      <h1>✈️ All Aboard 英語復習ツール</h1>
+      <h1>📖 英語復習ツール</h1>
       <p class="subtitle">教材を選んでスタート！</p>
       <div id="material-user-badge" class="user-badge"></div>
     </div>
@@ -60,7 +60,7 @@
     <button class="material-card material-card-textbook" onclick="App.selectMaterial('textbook')">
       <div class="material-card-icon">📚</div>
       <div class="material-card-name">教科書</div>
-      <div class="material-card-sub">All Aboard! English Communication II</div>
+      <div class="material-card-sub">Revised COMET English Communication I</div>
       <div class="material-card-arrow">→</div>
     </button>
     <button class="material-card material-card-target" onclick="App.selectMaterial('target')">
@@ -132,7 +132,7 @@
 <div id="screen-lesson-select" class="screen">
   <header class="top-header">
     <div class="top-header-inner">
-      <h1>✈️ All Aboard 英語復習ツール</h1>
+      <h1>📖 英語復習ツール</h1>
       <p class="subtitle">Lessonを選んでスタート！</p>
       <div id="user-badge" class="user-badge"></div>
     </div>
@@ -158,7 +158,7 @@
   </header>
 
   <div class="mode-path">
-    <!-- 単語モード -->
+    <!-- 単語 -->
     <div class="mode-section" id="section-vocabulary">
       <div class="mode-section-label vocab-label">📝 単語モード</div>
       <div class="mode-cards-row">
@@ -176,7 +176,7 @@
         <div class="mode-arrow">→</div>
         <div class="mode-card" id="card-vocab-fill" onclick="App.startMode('vocab','fill')">
           <div class="mode-icon">📝</div>
-          <div class="mode-name">空欄補充（4択）</div>
+          <div class="mode-name">穴埋め（例文）</div>
           <div class="mode-status"></div>
         </div>
       </div>
@@ -184,9 +184,9 @@
 
     <div class="section-arrow" id="arrow-to-reading">↓ 単語モードコンプリートで解放</div>
 
-    <!-- 読解モード -->
+    <!-- 本文 -->
     <div class="mode-section" id="section-reading">
-      <div class="mode-section-label reading-label">📖 読解モード</div>
+      <div class="mode-section-label reading-label">📖 本文モード</div>
       <div class="mode-cards-row">
         <div class="mode-card" id="card-reading-translate" onclick="App.startMode('reading','translate')">
           <div class="mode-icon">🔍</div>
@@ -194,17 +194,29 @@
           <div class="mode-status"></div>
         </div>
         <div class="mode-arrow">→</div>
+        <div class="mode-card" id="card-reading-english" onclick="App.startMode('reading','english')">
+          <div class="mode-icon">🖊️</div>
+          <div class="mode-name">英訳練習</div>
+          <div class="mode-status"></div>
+        </div>
+        <div class="mode-arrow">→</div>
         <div class="mode-card" id="card-reading-comprehension" onclick="App.startMode('reading','comprehension')">
           <div class="mode-icon">❓</div>
-          <div class="mode-name">英問英答クイズ</div>
+          <div class="mode-name">内容確認クイズ</div>
+          <div class="mode-status"></div>
+        </div>
+        <div class="mode-arrow">→</div>
+        <div class="mode-card" id="card-reading-rewrite" onclick="App.startMode('reading','rewrite')">
+          <div class="mode-icon">📄</div>
+          <div class="mode-name">アレンジ版問題</div>
           <div class="mode-status"></div>
         </div>
       </div>
     </div>
 
-    <div class="section-arrow" id="arrow-to-grammar">↓ 読解モードコンプリートで解放</div>
+    <div class="section-arrow" id="arrow-to-grammar">↓ 本文モードコンプリートで解放</div>
 
-    <!-- 文法モード -->
+    <!-- 文法 -->
     <div class="mode-section" id="section-grammar">
       <div class="mode-section-label grammar-label">⚡ 文法モード</div>
       <div class="mode-cards-row">
@@ -335,7 +347,7 @@
         <button class="btn-secondary btn-sm" onclick="App.clearGsUrl()">削除</button>
         <button class="btn-primary  btn-sm" onclick="App.saveGsUrl()">保存</button>
       </div>
-      <p class="settings-note">設定するとスコアがGoogle Sheetsに自動記録されます。</p>
+      <p class="settings-note">設定するとスコアがGoogle Sheetsに自動記録され、どの端末でも進捗が引き継がれます。</p>
     </div>
 
     <hr class="settings-divider" />
@@ -348,6 +360,7 @@
   </div>
 </div>
 
+<!-- Toast -->
 <div id="toast"></div>
 
 <script src="data.js"></script>

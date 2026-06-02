@@ -11,16 +11,16 @@
   --grammar-color: #6050a0;
   --grammar-light: #f3f0fa;
   --grammar-border:#c4b8e8;
-  --primary:       #1e6fa0;
-  --primary-light: #e8f4fa;
+  --primary:       #4a6ea8;
+  --primary-light: #eef2fa;
   --cleared-color: #2e7a50;
   --danger:        #c03838;
-  --bg:            #f0f5f8;
+  --bg:            #f6f3ee;
   --card-bg:       #ffffff;
-  --text:          #1e2c36;
-  --text-muted:    #6a7a88;
-  --border:        #d4e0e8;
-  --header-bg:     #1a5c80;
+  --text:          #2c2a26;
+  --text-muted:    #7a7268;
+  --border:        #e6dfd4;
+  --header-bg:     #5a7890;
   --radius:        16px;
   --radius-sm:     10px;
   --shadow:        0 1px 4px rgba(40,30,20,.07), 0 2px 12px rgba(40,30,20,.05);
@@ -831,10 +831,11 @@ body {
 }
 
 .material-card-name {
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   font-weight: 800;
   color: var(--text);
   margin-bottom: 4px;
+  white-space: nowrap;
 }
 
 .material-card-sub {
