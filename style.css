@@ -11,16 +11,16 @@
   --grammar-color: #6050a0;
   --grammar-light: #f3f0fa;
   --grammar-border:#c4b8e8;
-  --primary:       #4a6ea8;
-  --primary-light: #eef2fa;
+  --primary:       #1e6fa0;
+  --primary-light: #e8f4fa;
   --cleared-color: #2e7a50;
   --danger:        #c03838;
-  --bg:            #f6f3ee;
+  --bg:            #f0f5f8;
   --card-bg:       #ffffff;
-  --text:          #2c2a26;
-  --text-muted:    #7a7268;
-  --border:        #e6dfd4;
-  --header-bg:     #5a7890;
+  --text:          #1e2c36;
+  --text-muted:    #6a7a88;
+  --border:        #d4e0e8;
+  --header-bg:     #1a5c80;
   --radius:        16px;
   --radius-sm:     10px;
   --shadow:        0 1px 4px rgba(40,30,20,.07), 0 2px 12px rgba(40,30,20,.05);
@@ -791,4 +791,157 @@ body {
   .lesson-grid { grid-template-columns: 1fr; }
   .mode-card { min-width: 56px; }
   .mode-card .mode-name { font-size: .54rem; }
+}
+
+/* ===== TARGET COLOR VARIABLE ===== */
+:root { --target-color: #e85d04; --target-light: #fff4ee; --target-border: #f4a96a; }
+
+/* ===== MATERIAL SELECT ===== */
+.material-select-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 32px 20px 24px;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.material-card {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  padding: 24px 20px;
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  border: 2px solid transparent;
+  text-align: left;
+  transition: all .18s;
+  width: 100%;
+}
+
+.material-card:hover  { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+.material-card-textbook:hover { border-color: var(--primary); }
+.material-card-target:hover   { border-color: var(--target-color); }
+
+.material-card-icon {
+  font-size: 2.6rem;
+  flex-shrink: 0;
+}
+
+.material-card-name {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.material-card-sub {
+  font-size: .8rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.material-card-arrow {
+  margin-left: auto;
+  font-size: 1.3rem;
+  color: var(--border);
+  flex-shrink: 0;
+}
+
+.material-card-textbook { border-left: 4px solid var(--primary); }
+.material-card-target   { border-left: 4px solid var(--target-color); }
+
+/* ===== UNIT MODE SCREEN ===== */
+.unit-mode-path {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 24px 16px 40px;
+}
+
+.unit-mode-desc {
+  text-align: center;
+  font-size: .9rem;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+  font-weight: 500;
+}
+
+.unit-mode-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.unit-mode-card {
+  background: var(--card-bg);
+  border: 2px solid var(--target-border);
+  border-radius: var(--radius);
+  padding: 24px 16px 20px;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition: all .18s;
+  position: relative;
+}
+
+.unit-mode-card:hover {
+  border-color: var(--target-color);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.unit-mode-card.cleared {
+  background: #fff9f5;
+  border-color: var(--target-color);
+}
+
+.unit-mode-card-icon   { font-size: 2rem; margin-bottom: 8px; display: block; }
+.unit-mode-card-name   { font-size: .95rem; font-weight: 800; color: var(--text); margin-bottom: 4px; }
+.unit-mode-card-sub    { font-size: .72rem; color: var(--text-muted); }
+.unit-mode-status      { font-size: .7rem; margin-top: 8px; color: var(--text-muted); font-weight: 600; }
+.unit-mode-card.cleared .unit-mode-status { color: var(--cleared-color); }
+
+/* ===== TARGET FLASHCARD EXTRAS ===== */
+.target-pos-tag {
+  display: inline-block;
+  background: var(--target-color);
+  color: #fff;
+  font-size: .72rem;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 99px;
+  margin-bottom: 8px;
+}
+
+.flashcard-face.back .target-pos-tag {
+  background: rgba(255,255,255,.25);
+}
+
+.target-word-id {
+  font-size: .72rem;
+  color: var(--text-muted);
+  margin-top: 6px;
+}
+
+/* ===== TARGET QUIZ ===== */
+.target-quiz-word-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 0 4px;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+@media (max-width: 640px) {
+  .unit-mode-cards { gap: 10px; }
+  .unit-mode-card  { padding: 18px 10px 14px; }
+  .unit-mode-card-icon { font-size: 1.6rem; }
+  .unit-mode-card-name { font-size: .85rem; }
+  .material-select-wrap { padding: 20px 14px; }
+  .material-card { padding: 18px 14px; gap: 12px; }
+  .material-card-icon { font-size: 2rem; }
+  .material-card-name { font-size: 1.1rem; }
 }
