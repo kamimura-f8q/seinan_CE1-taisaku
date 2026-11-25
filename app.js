@@ -3,6 +3,11 @@
    ===================================================================== */
 
 // =====================================================================
+// SRS INTERVALS（間隔反復：日数）
+// =====================================================================
+const SRS_INTERVALS = [1, 2, 4, 7, 14, 30];
+
+// =====================================================================
 // UNLOCK CHAIN  （クリアすると次が解放される順番）
 // =====================================================================
 const UNLOCK_CHAIN = {
@@ -52,6 +57,9 @@ const App = (() => {
   let answered = false;
   let rearrangeSelected = [];
   let rearrangeWords = [];
+  let isSrsReview   = false;
+  let searchMode    = 'all';
+  let memoSaveTimer = null;
 
   // ---------------------------------------------------------------
   // USER STATE
@@ -116,6 +124,130 @@ const App = (() => {
 
   function resetLessonProgress(lessonId) {
     localStorage.removeItem(progressKey(lessonId));
+  }
+
+  // ---------------------------------------------------------------
+  // SRS（間隔反復復習）
+  // ---------------------------------------------------------------
+  function srsKey(lessonId) { return `er_srs_${userKey()}_${lessonId}`; }
+
+  function loadSrs(lessonId) {
+    try { return JSON.parse(localStorage.getItem(srsKey(lessonId))) || {}; }
+    catch { return {}; }
+  }
+
+  function saveSrs(lessonId, srs) {
+    localStorage.setItem(srsKey(lessonId), JSON.stringify(srs));
+  }
+
+  function getSrsId(lessonId, category, mode, q) {
+    if (!q) return null;
+    const prefix = `L${lessonId}`;
+    if (category === 'vocab') return q.en ? `${prefix}_v_${q.en}` : null;
+    if (category === 'reading' && mode === 'comprehension') {
+      const key = q.question || q.questionJa || q.text || '';
+      return key ? `${prefix}_c_${key.substring(0, 40)}` : null;
+    }
+    if (category === 'grammar' && mode === 'fill')
+      return q.sentence ? `${prefix}_f_${q.sentence.substring(0, 40)}` : null;
+    if (category === 'grammar' && mode === 'rearrange')
+      return q.original ? `${prefix}_r_${q.original.substring(0, 40)}`
+           : q.answer   ? `${prefix}_r_${q.answer.substring(0, 40)}`
+           : null;
+    return null;
+  }
+
+  function updateSrs(lessonId, srsId, correct) {
+    if (!srsId) return;
+    const srs = loadSrs(lessonId);
+    const p = srs[srsId] || { lv: 0, due: null, n: 0, ok: 0 };
+    p.n++;
+    if (correct) {
+      p.ok++;
+      p.lv = Math.min(5, p.lv + 1);
+      p.due = addDays(todayStr(), SRS_INTERVALS[p.lv]);
+    } else {
+      p.lv = 0;
+      p.due = addDays(todayStr(), SRS_INTERVALS[0]);
+    }
+    srs[srsId] = p;
+    saveSrs(lessonId, srs);
+  }
+
+  function getDueCount(lessonId) {
+    const srs = loadSrs(lessonId);
+    const t = todayStr();
+    return Object.values(srs).filter(p => p.due && p.due <= t && p.lv < 5).length;
+  }
+
+  function buildSrsReviewQuestions(lessonId) {
+    const srs = loadSrs(lessonId);
+    const t   = todayStr();
+    const lesson = LESSONS.find(l => l.id === lessonId);
+    if (!lesson) return [];
+    const due = new Set(Object.keys(srs).filter(id => srs[id].due && srs[id].due <= t && srs[id].lv < 5));
+    if (!due.size) return [];
+
+    const qs = [];
+    lesson.vocabulary.forEach(q => {
+      const id = getSrsId(lessonId, 'vocab', 'quiz', q);
+      if (due.has(id)) qs.push({ ...q, _srsId: id, _cat: 'vocab', _mode: 'quiz' });
+    });
+    lesson.comprehensionQuestions?.forEach(q => {
+      const id = getSrsId(lessonId, 'reading', 'comprehension', q);
+      if (due.has(id)) qs.push({ ...q, _srsId: id, _cat: 'reading', _mode: 'comprehension' });
+    });
+    lesson.grammar?.fillBlanks?.forEach(q => {
+      const id = getSrsId(lessonId, 'grammar', 'fill', q);
+      if (due.has(id)) qs.push({ ...q, _srsId: id, _cat: 'grammar', _mode: 'fill' });
+    });
+    lesson.grammar?.rearrange?.forEach(q => {
+      const id = getSrsId(lessonId, 'grammar', 'rearrange', q);
+      if (due.has(id)) qs.push({ ...q, _srsId: id, _cat: 'grammar', _mode: 'rearrange' });
+    });
+    return shuffle(qs);
+  }
+
+  // ---------------------------------------------------------------
+  // BOOKMARK
+  // ---------------------------------------------------------------
+  function bmKey() { return `er_bm_${userKey()}`; }
+
+  function loadBookmarks() {
+    try { return JSON.parse(localStorage.getItem(bmKey())) || []; }
+    catch { return []; }
+  }
+
+  function isBookmarked(srsId) { return loadBookmarks().includes(srsId); }
+
+  function toggleBookmarkById(srsId) {
+    if (!srsId) return false;
+    const bms = loadBookmarks();
+    const i = bms.indexOf(srsId);
+    if (i >= 0) bms.splice(i, 1);
+    else bms.push(srsId);
+    localStorage.setItem(bmKey(), JSON.stringify(bms));
+    return i < 0;
+  }
+
+  // ---------------------------------------------------------------
+  // MEMO
+  // ---------------------------------------------------------------
+  function memoKey() { return `er_memo_${userKey()}`; }
+
+  function loadMemos() {
+    try { return JSON.parse(localStorage.getItem(memoKey())) || {}; }
+    catch { return {}; }
+  }
+
+  function getMemo(srsId) { return srsId ? (loadMemos()[srsId] || '') : ''; }
+
+  function saveMemoById(srsId, text) {
+    if (!srsId) return;
+    const memos = loadMemos();
+    if (text.trim()) memos[srsId] = text.slice(0, 1000);
+    else delete memos[srsId];
+    localStorage.setItem(memoKey(), JSON.stringify(memos));
   }
 
   // ---------------------------------------------------------------
@@ -246,6 +378,19 @@ const App = (() => {
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
     document.getElementById(id).classList.add('active');
     window.scrollTo(0, 0);
+    const homeBtn = document.getElementById('global-home-btn');
+    if (homeBtn) {
+      const hideOn = ['screen-material-select', 'screen-login'];
+      homeBtn.style.display = hideOn.includes(id) ? 'none' : 'block';
+    }
+  }
+
+  function goHome() {
+    const activeId = document.querySelector('.screen.active')?.id;
+    if (activeId === 'screen-quiz') {
+      if (!confirm('ホームに戻りますか？\n（クイズの途中経過は保存されません）')) return;
+    }
+    showMaterialSelect();
   }
 
   // ---------------------------------------------------------------
@@ -289,7 +434,75 @@ const App = (() => {
   function showMaterialSelect() {
     const badge = document.getElementById('material-user-badge');
     if (badge) badge.textContent = currentUser.cls ? `${currentUser.cls}・${currentUser.num}番` : '';
+    updateHomeRing();
+    updateHomeSrsBoard();
     showScreen('screen-material-select');
+  }
+
+  function updateHomeSrsBoard() {
+    let totalDue = 0;
+    LESSONS.forEach(l => { totalDue += getDueCount(l.id); });
+    const board = document.getElementById('home-srs-board');
+    const text  = document.getElementById('home-srs-text');
+    if (board) board.style.display = totalDue > 0 ? '' : 'none';
+    if (text)  text.textContent = `${totalDue}問の復習期日が来ています`;
+  }
+
+  function openSrsSelect() {
+    for (const lesson of LESSONS) {
+      if (getDueCount(lesson.id) > 0) {
+        currentLesson = lesson;
+        startSrsReview();
+        return;
+      }
+    }
+    showToast('復習する問題がありません');
+  }
+
+  function startSrsReview() {
+    if (!currentLesson) return;
+    const qs = buildSrsReviewQuestions(currentLesson.id);
+    if (!qs.length) { showToast('復習する問題がありません'); return; }
+    isSrsReview = true;
+    questions   = qs;
+    qIndex      = 0;
+    score       = 0;
+    answered    = false;
+    rearrangeSelected = [];
+    rearrangeWords    = [];
+    document.getElementById('quiz-title').textContent = `${currentLesson.title} — SRS 復習モード`;
+    updateProgressBar();
+    renderQuestion();
+    showScreen('screen-quiz');
+  }
+
+  function updateHomeRing() {
+    let totalModes = 0, clearedModes = 0;
+    LESSONS.forEach(lesson => {
+      const { clearedCount, total } = getLessonProgress(lesson.id);
+      totalModes += total;
+      clearedModes += clearedCount;
+    });
+    const pct = totalModes > 0 ? Math.round((clearedModes / totalModes) * 100) : 0;
+    const circumference = 320.4;
+    const offset = circumference * (1 - pct / 100);
+
+    const pctEl = document.getElementById('home-pct');
+    if (pctEl) pctEl.textContent = pct + '%';
+    const cEl = document.getElementById('home-stat-cleared');
+    if (cEl) cEl.textContent = clearedModes;
+    const tEl = document.getElementById('home-stat-total');
+    if (tEl) tEl.textContent = totalModes;
+    const lEl = document.getElementById('home-stat-lessons');
+    if (lEl) lEl.textContent = LESSONS.length;
+
+    const ring = document.getElementById('home-ring');
+    if (ring) {
+      ring.style.strokeDashoffset = circumference;
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        ring.style.strokeDashoffset = offset;
+      }));
+    }
   }
 
   function selectMaterial(type) {
@@ -356,8 +569,8 @@ const App = (() => {
     const fcCard = document.getElementById('ucard-flashcard');
     const qzCard = document.getElementById('ucard-quiz');
 
-    if (fcStat) fcStat.textContent = fcCleared ? '✅ クリア済み' : '挑戦しよう！';
-    if (qzStat) qzStat.textContent = qzCleared ? '✅ クリア済み' : '挑戦しよう！';
+    if (fcStat) fcStat.textContent = fcCleared ? 'クリア済み' : '挑戦しよう！';
+    if (qzStat) qzStat.textContent = qzCleared ? 'クリア済み' : '挑戦しよう！';
     if (fcCard) fcCard.classList.toggle('cleared', fcCleared);
     if (qzCard) qzCard.classList.toggle('cleared', qzCleared);
 
@@ -454,9 +667,9 @@ const App = (() => {
         let lockEl = card.querySelector('.lock-icon');
         if (!lockEl) { lockEl = document.createElement('span'); lockEl.className = 'lock-icon'; card.appendChild(lockEl); }
 
-        if (!unlocked)    { statusEl.textContent = 'ロック中';      lockEl.textContent = '🔒'; }
-        else if (cleared) { statusEl.textContent = '✅ クリア済み'; lockEl.textContent = ''; }
-        else              { statusEl.textContent = '挑戦しよう！';   lockEl.textContent = ''; }
+        if (!unlocked)    { statusEl.textContent = 'ロック中';    lockEl.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="12" height="12"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>'; }
+        else if (cleared) { statusEl.textContent = 'クリア済み'; lockEl.innerHTML = ''; }
+        else              { statusEl.textContent = '挑戦しよう！'; lockEl.innerHTML = ''; }
       }
     }
 
@@ -467,6 +680,44 @@ const App = (() => {
     document.getElementById('section-grammar').classList.toggle('locked', !readingDone);
     document.getElementById('arrow-to-reading').classList.toggle('unlocked', vocabDone);
     document.getElementById('arrow-to-grammar').classList.toggle('unlocked', readingDone);
+
+    // SRS バッジ
+    if (currentLesson) {
+      const srs = loadSrs(currentLesson.id);
+      const t   = todayStr();
+      const srsModeMaps = {
+        'srs-vocab-flashcard':       { cat: 'vocab',   mode: 'flashcard',     items: () => currentLesson.vocabulary },
+        'srs-vocab-quiz':            { cat: 'vocab',   mode: 'quiz',          items: () => currentLesson.vocabulary },
+        'srs-vocab-fill':            { cat: 'vocab',   mode: 'fill',          items: () => currentLesson.vocabulary },
+        'srs-reading-comprehension': { cat: 'reading', mode: 'comprehension', items: () => currentLesson.comprehensionQuestions },
+        'srs-grammar-fill':          { cat: 'grammar', mode: 'fill',          items: () => currentLesson.grammar?.fillBlanks },
+        'srs-grammar-rearrange':     { cat: 'grammar', mode: 'rearrange',     items: () => currentLesson.grammar?.rearrange },
+      };
+      let totalDue = 0;
+      for (const [badgeId, { cat, mode, items }] of Object.entries(srsModeMaps)) {
+        const badge = document.getElementById(badgeId);
+        if (!badge) continue;
+        let cnt = 0;
+        (items() || []).forEach(q => {
+          const id = getSrsId(currentLesson.id, cat, mode, q);
+          if (id && srs[id]?.due <= t && srs[id]?.lv < 5) cnt++;
+        });
+        totalDue += cnt;
+        badge.textContent = cnt > 0 ? `🔔${cnt}` : '';
+        badge.style.display = cnt > 0 ? '' : 'none';
+      }
+      // SRS バナー
+      const banner = document.getElementById('srs-banner');
+      if (banner) {
+        if (totalDue > 0) {
+          banner.style.display = 'flex';
+          const bannerText = document.getElementById('srs-banner-text');
+          if (bannerText) bannerText.textContent = `${totalDue}問の復習期日が来ています`;
+        } else {
+          banner.style.display = 'none';
+        }
+      }
+    }
 
     showScreen('screen-mode-map');
   }
@@ -483,6 +734,7 @@ const App = (() => {
       if (!key) { openApiKeyModal(category, mode); return; }
     }
 
+    isSrsReview     = false;
     currentCategory = category;
     currentMode = mode;
     questions = buildQuestions(category, mode);
@@ -503,27 +755,53 @@ const App = (() => {
   function buildQuestions(category, mode) {
     const L = currentLesson;
     if (category === 'vocab') {
-      const voc = shuffle([...L.vocabulary]);
-      return voc;
+      return shuffle([...L.vocabulary]).map(q => ({
+        ...q,
+        _srsId: getSrsId(L.id, category, mode, q),
+        _cat: category, _mode: mode,
+      }));
     }
     if (category === 'reading') {
       const sentences = L.texts.find(t => !t.isRewrite)?.sentences || [];
-      if (mode === 'translate')     return [...sentences];
-      if (mode === 'english')       return [...sentences];
-      if (mode === 'comprehension') return shuffle([...L.comprehensionQuestions]).slice(0, Math.min(12, L.comprehensionQuestions.length));
+      if (mode === 'translate') return sentences.map(q => ({ ...q, _srsId: null, _cat: category, _mode: mode }));
+      if (mode === 'english')   return sentences.map(q => ({ ...q, _srsId: null, _cat: category, _mode: mode }));
+      if (mode === 'comprehension') return shuffle([...L.comprehensionQuestions]).slice(0, Math.min(12, L.comprehensionQuestions.length)).map(q => ({
+        ...q,
+        _srsId: getSrsId(L.id, category, mode, q),
+        _cat: category, _mode: mode,
+      }));
       if (mode === 'rewrite') {
         const rwSentences = L.texts.find(t => t.isRewrite)?.sentences || [];
-        const qs = shuffle([...(L.rewriteQuestions || [])]);
-        return [{ type: 'rewrite_passage', sentences: rwSentences }, ...qs];
+        const qs = shuffle([...(L.rewriteQuestions || [])]).map(q => ({ ...q, _srsId: null, _cat: category, _mode: mode }));
+        return [{ type: 'rewrite_passage', sentences: rwSentences, _srsId: null }, ...qs];
       }
     }
     if (category === 'grammar') {
-      if (mode === 'rules')       return [{ type: 'all_rules', rules: L.grammar.rules }];
-      if (mode === 'fill')        return shuffle([...L.grammar.fillBlanks]);
-      if (mode === 'rearrange')   return shuffle([...L.grammar.rearrange]);
-      if (mode === 'composition') return [...L.grammar.composition];
+      if (mode === 'rules')       return [{ type: 'all_rules', rules: L.grammar.rules, _srsId: null }];
+      if (mode === 'fill')        return shuffle([...L.grammar.fillBlanks]).map(q => ({
+        ...q, _srsId: getSrsId(L.id, category, mode, q), _cat: category, _mode: mode,
+      }));
+      if (mode === 'rearrange')   return shuffle([...L.grammar.rearrange]).map(q => ({
+        ...q, _srsId: getSrsId(L.id, category, mode, q), _cat: category, _mode: mode,
+      }));
+      if (mode === 'composition') return L.grammar.composition.map(q => ({ ...q, _srsId: null }));
     }
     return [];
+  }
+
+  function todayStr() {
+    const d = new Date();
+    return d.getFullYear() + '-' +
+      String(d.getMonth() + 1).padStart(2, '0') + '-' +
+      String(d.getDate()).padStart(2, '0');
+  }
+
+  function addDays(dateStr, n) {
+    const d = new Date(dateStr + 'T00:00:00');
+    d.setDate(d.getDate() + n);
+    return d.getFullYear() + '-' +
+      String(d.getMonth() + 1).padStart(2, '0') + '-' +
+      String(d.getDate()).padStart(2, '0');
   }
 
   function shuffle(arr) {
@@ -542,11 +820,15 @@ const App = (() => {
     answered = false;
     hide('btn-check'); hide('btn-next'); hide('btn-finish');
 
+    const memoBox = document.getElementById('memo-box');
+    if (memoBox) memoBox.style.display = 'none';
+
     const q = questions[qIndex];
     const content = document.getElementById('quiz-content');
     content.innerHTML = '';
 
-    const cat = currentCategory, mode = currentMode;
+    const cat  = isSrsReview ? (q._cat  || currentCategory) : currentCategory;
+    const mode = isSrsReview ? (q._mode || currentMode)     : currentMode;
 
     if      (cat === 'target'  && mode === 'flashcard')    renderTargetFlashcard(q, content);
     else if (cat === 'target'  && mode === 'quiz')         renderTargetQuiz(q, content);
@@ -562,6 +844,76 @@ const App = (() => {
     else if (cat === 'grammar' && mode === 'fill')         renderGrammarFill(q, content);
     else if (cat === 'grammar' && mode === 'rearrange')    renderRearrange(q, content);
     else if (cat === 'grammar' && mode === 'composition')  renderComposition(q, content);
+
+    updateQuizTools();
+  }
+
+  // ---------------------------------------------------------------
+  // QUIZ TOOLS (ブックマーク・メモ)
+  // ---------------------------------------------------------------
+  function updateQuizTools() {
+    const q = questions[qIndex];
+    const srsId = q?._srsId;
+    const tools = document.getElementById('quiz-tools');
+    if (!tools) return;
+
+    const skipTools = !srsId || (currentCategory === 'grammar' && currentMode === 'rules') ||
+                      (currentCategory === 'reading' && (currentMode === 'translate' || currentMode === 'english'));
+    tools.style.display = skipTools ? 'none' : 'flex';
+    if (skipTools) return;
+
+    const bmed = isBookmarked(srsId);
+    const bmIcon  = document.getElementById('bm-icon');
+    const bmLabel = document.getElementById('bm-label');
+    const bmBtn   = document.getElementById('bm-btn');
+    if (bmIcon)  bmIcon.textContent  = bmed ? '★' : '☆';
+    if (bmLabel) bmLabel.textContent = bmed ? 'ブックマーク済み' : 'ブックマーク';
+    if (bmBtn)   bmBtn.classList.toggle('active', bmed);
+
+    const memos   = loadMemos();
+    const hasMemo = !!(memos[srsId]);
+    const memoBtn = document.getElementById('memo-open-btn');
+    const memoLbl = document.getElementById('memo-label');
+    if (memoLbl) memoLbl.textContent = hasMemo ? 'メモあり' : 'メモ';
+    if (memoBtn) memoBtn.classList.toggle('has-memo', hasMemo);
+  }
+
+  function toggleBookmark() {
+    const q = questions[qIndex];
+    const srsId = q?._srsId;
+    if (!srsId) return;
+    toggleBookmarkById(srsId);
+    updateQuizTools();
+  }
+
+  function toggleMemo() {
+    const box = document.getElementById('memo-box');
+    if (!box) return;
+    const isOpen = box.style.display !== 'none';
+    if (!isOpen) {
+      const q = questions[qIndex];
+      const srsId = q?._srsId;
+      const ta = document.getElementById('memo-textarea');
+      if (ta) ta.value = getMemo(srsId);
+      box.style.display = 'block';
+    } else {
+      box.style.display = 'none';
+    }
+  }
+
+  function onMemoInput() {
+    const q = questions[qIndex];
+    const srsId = q?._srsId;
+    if (!srsId) return;
+    clearTimeout(memoSaveTimer);
+    memoSaveTimer = setTimeout(() => {
+      const ta = document.getElementById('memo-textarea');
+      if (!ta) return;
+      saveMemoById(srsId, ta.value);
+      const lbl = document.getElementById('memo-save-label');
+      if (lbl) { lbl.textContent = '保存しました'; setTimeout(() => { if (lbl) lbl.textContent = ''; }, 1500); }
+      updateQuizTools();
+    }, 800);
   }
 
   // ---------------------------------------------------------------
@@ -644,7 +996,10 @@ const App = (() => {
   }
 
   function flashcardEval(correct) {
+    const q = questions[qIndex];
     if (correct) score++;
+    const srsId = q?._srsId;
+    if (srsId && currentLesson) updateSrs(currentLesson.id, srsId, correct);
     if (qIndex >= questions.length - 1) finishMode();
     else nextQuestion();
   }
@@ -670,6 +1025,11 @@ const App = (() => {
   function selectOption(btn, correct, correctAnswer) {
     if (answered) return;
     answered = true;
+
+    const q = questions[qIndex];
+    const srsId = q?._srsId;
+    if (srsId && currentLesson) updateSrs(currentLesson.id, srsId, correct);
+
     btn.classList.add(correct ? 'correct' : 'incorrect');
     if (correct) {
       score++;
@@ -1103,6 +1463,7 @@ const App = (() => {
       const val = inp.value.trim().toLowerCase().replace(/\s+/g, ' ');
       const correct = val === q.answer.toLowerCase();
       if (correct) score++;
+      if (q._srsId && currentLesson) updateSrs(currentLesson.id, q._srsId, correct);
       inp.classList.add(correct ? 'correct' : 'incorrect');
       inp.disabled = true;
       if (!correct) appendReveal(`正解：${q.answer}`);
@@ -1113,6 +1474,7 @@ const App = (() => {
       const userAns = rearrangeSelected.map(i => i.word).join(' ').toLowerCase().replace(/\s+/g, ' ');
       const correct  = userAns === q.answer.toLowerCase();
       if (correct) score++;
+      if (q._srsId && currentLesson) updateSrs(currentLesson.id, q._srsId, correct);
       const area = document.getElementById('rearrange-answer');
       if (area) area.style.borderColor = correct ? 'var(--cleared-color)' : '#dc2626';
       if (!correct) appendReveal(`正解：${q.answer}`);
@@ -1392,6 +1754,221 @@ Format exactly as:
     showToast('進捗をリセットしました');
   }
 
+  function confirmResetSrs() {
+    if (!currentLesson) { showToast('Lessonを選択してください'); return; }
+    if (!confirm(`「${currentLesson.title}」のSRS復習データをリセットしますか？`)) return;
+    localStorage.removeItem(srsKey(currentLesson.id));
+    closeSettings();
+    showToast('SRS復習データをリセットしました');
+  }
+
+  // ---------------------------------------------------------------
+  // 網羅マップ
+  // ---------------------------------------------------------------
+  function openCoverageMap() {
+    if (!currentLesson) return;
+    document.getElementById('coverage-map-subtitle').textContent = currentLesson.title;
+
+    const srs   = loadSrs(currentLesson.id);
+    const t     = todayStr();
+    const memos = loadMemos();
+    const bms   = loadBookmarks();
+
+    function statusClass(srsId) {
+      if (!srsId || !srs[srsId]) return 'cov-unseen';
+      const p = srs[srsId];
+      if (p.lv === 0) return p.n > 0 ? 'cov-wrong' : 'cov-unseen';
+      if (p.lv >= 4)  return 'cov-mastered';
+      return 'cov-ok';
+    }
+    function statusLabel(srsId) {
+      if (!srsId || !srs[srsId]) return '未出題';
+      const p = srs[srsId];
+      if (p.lv === 0 && p.n > 0) return '要復習';
+      if (p.lv >= 4)  return `定着 Lv${p.lv}`;
+      return `Lv${p.lv}`;
+    }
+
+    const legend = `
+      <div class="cov-legend">
+        <span class="cov-dot cov-unseen"></span>未出題
+        <span class="cov-dot cov-wrong"></span>要復習
+        <span class="cov-dot cov-ok"></span>正解
+        <span class="cov-dot cov-mastered"></span>定着（Lv4+）
+      </div>`;
+
+    const vocabTiles = currentLesson.vocabulary.map(q => {
+      const srsId = getSrsId(currentLesson.id, 'vocab', 'quiz', q);
+      const cls   = statusClass(srsId);
+      const lbl   = statusLabel(srsId);
+      const bmed  = bms.includes(srsId) ? '★' : '';
+      const memo  = memos[srsId] ? '📝' : '';
+      const due   = srs[srsId]?.due && srs[srsId].due <= t ? '🔔' : '';
+      return `
+        <div class="cov-tile ${cls}" title="${q.en}：${q.ja}（${lbl}）" onclick="App.jumpToVocab('${escHtml(q.en)}')">
+          <div class="cov-tile-word">${q.en}</div>
+          <div class="cov-tile-ja">${q.ja}</div>
+          <div class="cov-tile-badges">${bmed}${memo}${due}</div>
+        </div>`;
+    }).join('');
+
+    function modeSummary(cat, mode, items, idFn) {
+      if (!items?.length) return '';
+      const total    = items.length;
+      const mastered = items.filter(q => (srs[idFn(q)]?.lv || 0) >= 4).length;
+      const pct      = Math.round((mastered / total) * 100);
+      return `
+        <div class="cov-mode-row">
+          <div class="cov-mode-name">${MODE_LABELS[cat][mode]}</div>
+          <div class="cov-mode-stat">${mastered}/${total} 定着</div>
+          <div class="cov-bar-wrap"><div class="cov-bar-fill" style="width:${pct}%"></div></div>
+          <div class="cov-pct">${pct}%</div>
+        </div>`;
+    }
+
+    const L = currentLesson;
+    const compSummary = modeSummary('reading','comprehension', L.comprehensionQuestions,
+      q => getSrsId(L.id,'reading','comprehension',q));
+    const fillSummary = modeSummary('grammar','fill', L.grammar?.fillBlanks,
+      q => getSrsId(L.id,'grammar','fill',q));
+    const rearSummary = modeSummary('grammar','rearrange', L.grammar?.rearrange,
+      q => getSrsId(L.id,'grammar','rearrange',q));
+
+    document.getElementById('coverage-map-content').innerHTML = `
+      ${legend}
+      <div class="cov-section-title">単語（${L.vocabulary.length}語）</div>
+      <div class="cov-tile-grid">${vocabTiles}</div>
+      <div class="cov-section-title" style="margin-top:24px">問題別 定着状況</div>
+      ${compSummary}${fillSummary}${rearSummary}`;
+
+    showScreen('screen-coverage-map');
+  }
+
+  function jumpToVocab(en) {
+    showToast(`「${en}」の単語モードを開きます`);
+    startMode('vocab', 'flashcard');
+  }
+
+  // ---------------------------------------------------------------
+  // 全文検索 / ブックマーク
+  // ---------------------------------------------------------------
+  function openBookmarks() {
+    searchMode = 'bookmarks';
+    document.querySelectorAll('.sf-btn').forEach(b => {
+      b.classList.toggle('on', b.dataset.mode === 'bookmarks');
+    });
+    const inp = document.getElementById('search-input');
+    if (inp) inp.value = '';
+    runSearch('');
+    showScreen('screen-search');
+  }
+
+  function openSearch() {
+    searchMode = 'all';
+    document.querySelectorAll('.sf-btn').forEach(b => {
+      b.classList.toggle('on', b.dataset.mode === 'all');
+    });
+    const inp = document.getElementById('search-input');
+    if (inp) inp.value = '';
+    const res = document.getElementById('search-results');
+    if (res) res.innerHTML = '<div class="search-hint">検索ワードを入力してください<br><span style="font-size:.8rem;color:var(--text-muted)">単語・意味・例文・文法問題を横断検索</span></div>';
+    showScreen('screen-search');
+    setTimeout(() => inp?.focus(), 100);
+  }
+
+  function setSearchMode(mode, btn) {
+    searchMode = mode;
+    document.querySelectorAll('.sf-btn').forEach(b => b.classList.remove('on'));
+    btn.classList.add('on');
+    runSearch(document.getElementById('search-input')?.value || '');
+  }
+
+  function runSearch(kw) {
+    kw = (kw || '').trim().toLowerCase();
+    const results = document.getElementById('search-results');
+    if (!results) return;
+    if (!kw && searchMode !== 'bookmarks') {
+      results.innerHTML = '<div class="search-hint">検索ワードを入力してください</div>';
+      return;
+    }
+
+    const bms   = loadBookmarks();
+    const memos = loadMemos();
+    const hits  = [];
+
+    LESSONS.forEach(lesson => {
+      if (searchMode === 'all' || searchMode === 'vocab') {
+        lesson.vocabulary.forEach(q => {
+          const srsId = getSrsId(lesson.id, 'vocab', 'quiz', q);
+          if (searchMode === 'bookmarks' && !bms.includes(srsId)) return;
+          const text = `${q.en} ${q.ja} ${q.example || ''} ${q.exampleJa || ''}`.toLowerCase();
+          if (!kw || text.includes(kw)) {
+            hits.push({ lessonId: lesson.id, cat: 'vocab', mode: 'quiz',
+              label: `L${lesson.id} 単語`, title: q.en, sub: q.ja,
+              bmed: bms.includes(srsId), memo: memos[srsId] || '', srsId });
+          }
+        });
+      }
+      if (searchMode === 'all' || searchMode === 'reading') {
+        lesson.comprehensionQuestions?.forEach(q => {
+          const srsId = getSrsId(lesson.id, 'reading', 'comprehension', q);
+          if (searchMode === 'bookmarks' && !bms.includes(srsId)) return;
+          const text = `${q.question || ''} ${q.options?.join(' ') || ''} ${q.passage || ''}`.toLowerCase();
+          if (!kw || text.includes(kw)) {
+            hits.push({ lessonId: lesson.id, cat: 'reading', mode: 'comprehension',
+              label: `L${lesson.id} 内容確認`, title: q.question || q.questionJa || '',
+              sub: q.options?.[q.answer] || '',
+              bmed: bms.includes(srsId), memo: memos[srsId] || '', srsId });
+          }
+        });
+      }
+      if (searchMode === 'all' || searchMode === 'grammar') {
+        lesson.grammar?.fillBlanks?.forEach(q => {
+          const srsId = getSrsId(lesson.id, 'grammar', 'fill', q);
+          if (searchMode === 'bookmarks' && !bms.includes(srsId)) return;
+          const text = `${q.sentence} ${q.answer}`.toLowerCase();
+          if (!kw || text.includes(kw)) {
+            hits.push({ lessonId: lesson.id, cat: 'grammar', mode: 'fill',
+              label: `L${lesson.id} 穴埋め`, title: q.sentence.replace('___', `[${q.answer}]`), sub: '',
+              bmed: bms.includes(srsId), memo: memos[srsId] || '', srsId });
+          }
+        });
+        lesson.grammar?.rearrange?.forEach(q => {
+          const srsId = getSrsId(lesson.id, 'grammar', 'rearrange', q);
+          if (searchMode === 'bookmarks' && !bms.includes(srsId)) return;
+          const text = `${q.original || ''} ${q.answer} ${q.ja || ''}`.toLowerCase();
+          if (!kw || text.includes(kw)) {
+            hits.push({ lessonId: lesson.id, cat: 'grammar', mode: 'rearrange',
+              label: `L${lesson.id} 並べ替え`,
+              title: q.template ? q.template.replace('___', `( ${q.blankAnswer} )`) : q.answer,
+              sub: q.ja || '',
+              bmed: bms.includes(srsId), memo: memos[srsId] || '', srsId });
+          }
+        });
+      }
+    });
+
+    if (!hits.length) {
+      results.innerHTML = '<div class="search-hint">見つかりませんでした</div>';
+      return;
+    }
+    results.innerHTML = hits.slice(0, 80).map(h => `
+      <div class="search-hit" onclick="App.jumpToMode(${h.lessonId},'${h.cat}','${h.mode}')">
+        <div class="hit-head">
+          <span class="hit-label">${h.label}</span>
+          ${h.bmed ? '<span class="hit-bm">★</span>' : ''}
+        </div>
+        <div class="hit-title">${escHtml(h.title)}</div>
+        ${h.sub  ? `<div class="hit-sub">${escHtml(h.sub)}</div>` : ''}
+        ${h.memo ? `<div class="hit-memo">📝 ${escHtml(h.memo.substring(0,60))}${h.memo.length>60?'…':''}</div>` : ''}
+      </div>`).join('');
+  }
+
+  function jumpToMode(lessonId, cat, mode) {
+    currentLesson = LESSONS.find(l => l.id === lessonId);
+    startMode(cat, mode);
+  }
+
   // ---------------------------------------------------------------
   // API KEY MODAL（旧 → 設定パネルに統合）
   // ---------------------------------------------------------------
@@ -1606,15 +2183,20 @@ Format exactly as:
     // ログイン
     selectClass, submitLogin, logout,
     // クイズ
-    startMode,
+    startMode, startSrsReview, openSrsSelect,
     flashcardEval, selectOption, revealTranslation,
     selectWord, removeWord,
     checkAnswer, nextQuestion, finishMode, retryMode,
+    // ブックマーク・メモ
+    toggleBookmark, toggleMemo, onMemoInput,
+    // 網羅マップ・検索
+    openCoverageMap, jumpToVocab,
+    openSearch, openBookmarks, runSearch, setSearchMode, jumpToMode, goHome,
     // 設定
     openSettings, closeSettings,
     saveApiKey, clearApiKey, saveApiKeyAndStart,
     saveGsUrl, clearGsUrl,
-    confirmResetLesson,
+    confirmResetLesson, confirmResetSrs,
     // 旧モーダル互換
     openApiKeyModal, closeApiKeyModal,
   };
